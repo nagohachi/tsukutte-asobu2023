@@ -2,40 +2,40 @@ import { useState } from "react";
 import { shortToneSeconds, longToneSeconds } from "./Params";
 
 /**
- * seconds 秒間、frequency Hz の音を鳴らす 
+ * seconds 秒間、frequency Hz の音を鳴らす
  * @param {number} seconds 秒数
  * @param {number} frequency 周波数
-*/
-async function generateTone(seconds:number, frequency:number) {
-	const audioCtx = new window.AudioContext();
-	const osc = audioCtx.createOscillator();
-	osc.type = "square";
-	osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
-	osc.connect(audioCtx.destination);
-	osc.start();
-	await new Promise(resolve => {
-		setTimeout(() => {
-			osc.stop();
-			osc.disconnect(audioCtx.destination);
-			resolve(null);
-		}, seconds * 1000);
-	});
+ */
+async function generateTone(seconds: number, frequency: number) {
+  const audioCtx = new window.AudioContext();
+  const osc = audioCtx.createOscillator();
+  osc.type = "square";
+  osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+  osc.connect(audioCtx.destination);
+  osc.start();
+  await new Promise((resolve) => {
+    setTimeout(() => {
+      osc.stop();
+      osc.disconnect(audioCtx.destination);
+      resolve(null);
+    }, seconds * 1000);
+  });
 }
 
 /**
  * 0.2 秒間、frequency Hz の音を鳴らす
  * @param {number} frequency 周波数
  */
-export async function generateShortTone(frequency:number) {
-	await generateTone(shortToneSeconds, frequency);
+export async function generateShortTone(frequency: number) {
+  await generateTone(shortToneSeconds, frequency);
 }
 
 /**
  * 0.6 秒間、frequency Hz の音を鳴らす
  * @param {number} frequency 周波数
-*/
-export async function generateLongTone(frequency:number) {
-	await generateTone(longToneSeconds, frequency);
+ */
+export async function generateLongTone(frequency: number) {
+  await generateTone(longToneSeconds, frequency);
 }
 
 interface PlaySoundProps {
@@ -52,7 +52,7 @@ interface PlaySoundProps {
 export function PlaySoundForFixedTime({
   value,
   seconds,
-  frequency
+  frequency,
 }: PlaySoundProps) {
   if (!seconds) return;
 
@@ -65,7 +65,6 @@ export function PlaySoundForFixedTime({
     </button>
   );
 }
-
 
 /**
  * ボタンを押している間だけ音を鳴らす

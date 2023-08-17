@@ -24,7 +24,7 @@ function App() {
         <PlaySoundForFreeTime value="押下の間ずっと" frequency={frequency} />
       </div>
       <div>
-        <CharToMorse char={'b'} />
+        <CharToMorse char={"b"} />
       </div>
     </>
   );
