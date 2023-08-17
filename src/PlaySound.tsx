@@ -1,5 +1,39 @@
 import { useState } from "react";
 
+/**
+ * seconds 秒間、frequency Hz の音を鳴らす 
+ * @param {number} seconds 秒数
+ * @param {number} frequency 周波数
+*/
+function generateTone(seconds:number, frequency:number) {
+	const audioCtx = new window.AudioContext();
+	const osc = audioCtx.createOscillator();
+	osc.type = "square";
+	osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+	osc.connect(audioCtx.destination);
+	osc.start();
+	setTimeout(() => {
+		osc.stop();
+		osc.disconnect(audioCtx.destination);
+	}, seconds * 1000);
+}
+
+/**
+ * 0.3 秒間、frequency Hz の音を鳴らす
+ * @param {number} frequency 周波数
+ */
+export function generateShortTone(frequency:number) {
+	generateTone(0.3, frequency);
+}
+
+/**
+ * 0.6 秒間、frequency Hz の音を鳴らす
+ * @param {number} frequency 周波数
+*/
+export function generateLongTone(frequency:number) {
+	generateTone(0.6, frequency);
+}
+
 interface PlaySoundProps {
   value: string;
   seconds?: number;
@@ -7,9 +41,9 @@ interface PlaySoundProps {
 }
 
 /**
- * value ボタンに表示する文字列
- * seconds 鳴らす音の秒数
- * frequency 鳴らす音の周波数
+ * @param {string} value ボタンに表示する文字列
+ * @param {number} seconds 鳴らす音の秒数
+ * @param {number} frequency 鳴らす音の周波数
  */
 export function PlaySoundForFixedTime({
   value,
@@ -18,22 +52,8 @@ export function PlaySoundForFixedTime({
 }: PlaySoundProps) {
   if (!seconds) return;
 
-  const [audioCtx] = useState(new window.AudioContext());
-  const [_, setOscillator] = useState<OscillatorNode | null>(null);
-
   const handleMousedown = (_: React.MouseEvent<HTMLButtonElement>) => {
-    const osc = audioCtx.createOscillator();
-    if (!osc) return;
-    osc.type = "square";
-    osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
-    osc.connect(audioCtx.destination);
-    osc.start();
-    setOscillator(osc);
-    setTimeout(() => {
-      osc.stop();
-      osc.disconnect(audioCtx.destination);
-      setOscillator(null);
-    }, seconds * 1000);
+    generateTone(seconds, frequency);
   };
   return (
     <button className="play__btn" onClick={handleMousedown}>
@@ -42,10 +62,11 @@ export function PlaySoundForFixedTime({
   );
 }
 
+
 /**
  * ボタンを押している間だけ音を鳴らす
- * value ボタンに表示する文字列
- * frequency 鳴らす音の周波数
+ * @param {string} value ボタンに表示する文字列
+ * @param {number} frequency 鳴らす音の周波数
  */
 export function PlaySoundForFreeTime({ value, frequency }: PlaySoundProps) {
   const [audioCtx] = useState(new window.AudioContext());
