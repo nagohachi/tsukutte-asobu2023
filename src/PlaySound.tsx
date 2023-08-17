@@ -31,7 +31,7 @@ export function generateShortTone(frequency:number) {
  * @param {number} frequency 周波数
 */
 export function generateLongTone(frequency:number) {
-	generateTone(0.6, frequency);
+	generateTone(0.9, frequency);
 }
 
 interface PlaySoundProps {
