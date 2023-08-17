@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [audioCtx] = useState(new window.AudioContext());
+  const [oscillator, setOscillator] = useState<OscillatorNode | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const playButton = document.getElementById("oscPlayer");
+    if (!playButton) return;
+
+    const handleMousedown = (event: MouseEvent) => {
+      if (!isPlaying) {
+        playButton.innerHTML = "⏸ Stop";
+        const osc = audioCtx.createOscillator();
+        if (!osc) return;
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+        osc.connect(audioCtx.destination);
+        osc.start();
+        setOscillator(osc);
+        setIsPlaying(true);
+      } else {
+        playButton.innerHTML = "▶️ Play";
+        if (oscillator) {
+          oscillator.stop();
+          oscillator.disconnect(audioCtx.destination);
+        }
+        setOscillator(null);
+        setIsPlaying(false);
+      }
+    };
+
+    playButton.addEventListener("mousedown", handleMousedown, false);
+
+    return () => {
+      playButton.removeEventListener("mousedown", handleMousedown);
+    };
+  }, [audioCtx, oscillator, isPlaying]);
+
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <button id="oscPlayer">▶️ Play</button>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
