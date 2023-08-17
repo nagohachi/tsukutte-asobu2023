@@ -1,37 +1,41 @@
 import { useState } from "react";
+import { shortToneSeconds, longToneSeconds } from "./Params";
 
 /**
  * seconds 秒間、frequency Hz の音を鳴らす 
  * @param {number} seconds 秒数
  * @param {number} frequency 周波数
 */
-function generateTone(seconds:number, frequency:number) {
+async function generateTone(seconds:number, frequency:number) {
 	const audioCtx = new window.AudioContext();
 	const osc = audioCtx.createOscillator();
 	osc.type = "square";
 	osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
 	osc.connect(audioCtx.destination);
 	osc.start();
-	setTimeout(() => {
-		osc.stop();
-		osc.disconnect(audioCtx.destination);
-	}, seconds * 1000);
+	await new Promise(resolve => {
+		setTimeout(() => {
+			osc.stop();
+			osc.disconnect(audioCtx.destination);
+			resolve(null);
+		}, seconds * 1000);
+	});
 }
 
 /**
- * 0.3 秒間、frequency Hz の音を鳴らす
+ * 0.2 秒間、frequency Hz の音を鳴らす
  * @param {number} frequency 周波数
  */
-export function generateShortTone(frequency:number) {
-	generateTone(0.3, frequency);
+export async function generateShortTone(frequency:number) {
+	await generateTone(shortToneSeconds, frequency);
 }
 
 /**
  * 0.6 秒間、frequency Hz の音を鳴らす
  * @param {number} frequency 周波数
 */
-export function generateLongTone(frequency:number) {
-	generateTone(0.9, frequency);
+export async function generateLongTone(frequency:number) {
+	await generateTone(longToneSeconds, frequency);
 }
 
 interface PlaySoundProps {

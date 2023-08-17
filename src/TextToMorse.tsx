@@ -1,10 +1,11 @@
 import { generateShortTone, generateLongTone } from "./PlaySound";
+import { frequency, spaceBetweenCharsMilliseconds } from "./Params";
 
 interface CharToMorseProps {
   char: string;
 }
 
-// 0:短音, 1:長音
+// 0:短音, 1:長音, -:文字間の間隔をあける
 const morse: { [key: string]: string } = {
   a: "01",
   b:"1000",
@@ -191,7 +192,8 @@ const morse: { [key: string]: string } = {
   7:"11000",
   8:"11100",
   9:"11110",
-  0:"11111"
+  0:"11111",
+  ー:"01101",
 };
 
 /**
@@ -211,15 +213,12 @@ export function CharToMorse({ char }: CharToMorseProps) {
 
   const handleMousedown = async (_: React.MouseEvent<HTMLButtonElement>) => {
     for (var i = 0; i < morse[char].length; i++) {
-      console.log(morse[char].charAt(i));
-      
       if (morse[char].charAt(i) === "0") {
-        generateShortTone(7040);
+        await generateShortTone(frequency);
       } else if (morse[char].charAt(i) === "1") {
-        generateLongTone(7040);
+        await generateLongTone(frequency);
       }
-      // 文字の間は 0.9 秒待つ
-      await sleep(900);
+      await sleep(spaceBetweenCharsMilliseconds);
     }
   };
   return (

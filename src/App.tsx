@@ -1,4 +1,5 @@
 import { PlaySoundForFixedTime, PlaySoundForFreeTime } from "./PlaySound";
+import { shortToneSeconds, longToneSeconds, frequency } from "./Params";
 import { CharToMorse } from "./TextToMorse";
 import "./App.css";
 
@@ -8,19 +9,19 @@ function App() {
       <div>
         <PlaySoundForFixedTime
           value="押下時に短音"
-          seconds={0.3}
-          frequency={7040}
+          seconds={shortToneSeconds}
+          frequency={frequency}
         />
       </div>
       <div>
         <PlaySoundForFixedTime
           value="押下時に長音"
-          seconds={0.6}
-          frequency={7040}
+          seconds={longToneSeconds}
+          frequency={frequency}
         />
       </div>
       <div>
-        <PlaySoundForFreeTime value="押下の間ずっと" frequency={7040} />
+        <PlaySoundForFreeTime value="押下の間ずっと" frequency={frequency} />
       </div>
       <div>
         <CharToMorse char={'b'} />
