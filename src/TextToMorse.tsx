@@ -1,4 +1,4 @@
-// 0:短音, 1:長音
+// 0:短音, 1:長音, -:文字間の間隔をあける
 const morse: { [key: string]: string } = {
   a: "01",
   b:"1000",
@@ -185,7 +185,8 @@ const morse: { [key: string]: string } = {
   7:"11000",
   8:"11100",
   9:"11110",
-  0:"11111"
+  0:"11111",
+  ー:"01101",
 };
 
 export function CharToMorse(char: string) {
