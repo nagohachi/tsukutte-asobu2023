@@ -1,9 +1,6 @@
 import "./App.css";
 import FrequencyBar from "./ FrequencyBar";
 import MenuTabs from "./MenuTabs";
-// import { PlaySoundForFreeTime, PlaySoundMusic } from "./PlaySound";
-// import { frequency } from "./Params";
-// import { TextToMorse } from "./TextToMorse";
 import { DoubleTouchThenSwipe } from "./Swipes";
 import { useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material";
@@ -25,9 +22,15 @@ function App() {
       {!isCamouflage && (
         <ThemeProvider theme={theme}>
           <FrequencyBar frequency={frequency} setFrequency={setFrequency} />
-          <Grid container spacing={1} padding={2}>
+          <Grid
+            container
+            spacing={1}
+            padding={2}
+            sx={{ typography: "caption" }}
+            alignItems="center"
+          >
             <Grid item>
-              <InfoOutlinedIcon />
+              <InfoOutlinedIcon sx={{ display: "flex" }} />
             </Grid>
             <Grid item>ダブルタップして上にスワイプで電源偽装</Grid>
           </Grid>

@@ -5,28 +5,28 @@ import Grid from "@mui/material/Grid";
 const marks = [
   {
     value: 10000,
-    label: "~70",
+    label: "~70"
   },
   {
     value: 12000,
-    label: "~60",
+    label: "~60"
   },
   {
     value: 14000,
-    label: "~50",
+    label: "~50"
   },
   {
     value: 15000,
-    label: "~40",
+    label: "~40"
   },
   {
     value: 16000,
-    label: "~30",
+    label: "~30"
   },
   {
     value: 20000,
-    label: "~20",
-  },
+    label: "~20"
+  }
 ];
 
 function valuetext(value: number) {
@@ -52,10 +52,10 @@ function FrequencyBar({ frequency, setFrequency }: FrequencyBarProps) {
     <>
       <Box sx={{ flexGrow: 1, p: 2, fontSize: "h5.fontSize" }}>
         <Grid container spacing={0}>
-          <Grid item xs={"auto"}>
+          <Grid item xs={"auto"} sx={{ fontFamily: "Noto Sans JP" }}>
             周波数(Hz)
           </Grid>
-          <Grid item xs sx={{ textAlign: "right" }}>
+          <Grid item xs sx={{ textAlign: "right", fontFamily: "Noto Sans JP" }}>
             <span
               style={{ borderBottom: "solid 2px #e0e0e0", marginRight: "8px" }}
             >
@@ -66,7 +66,9 @@ function FrequencyBar({ frequency, setFrequency }: FrequencyBarProps) {
         </Grid>
       </Box>
       <Box sx={{ p: 3 }}>
-        <Box sx={{ textAlign: "center" }}>周波数(Hz)</Box>
+        <Box sx={{ textAlign: "center", fontFamily: "Noto Sans JP" }}>
+          周波数(Hz)
+        </Box>
         <Slider
           aria-label="frequency bar"
           min={10000}
@@ -81,7 +83,9 @@ function FrequencyBar({ frequency, setFrequency }: FrequencyBarProps) {
           valueLabelDisplay="on"
           sx={{ mt: 4 }}
         />
-        <Box sx={{ textAlign: "center" }}>目安年齢(歳)</Box>
+        <Box sx={{ textAlign: "center", fontFamily: "Noto Sans JP" }}>
+          目安年齢(歳)
+        </Box>
       </Box>
     </>
   );
