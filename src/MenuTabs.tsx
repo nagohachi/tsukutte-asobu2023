@@ -36,9 +36,15 @@ const CustomTabPanel = (props: TabPanelProps) => {
 type ModeProps = {
   subMode: string;
   onClick: any;
+  text?: string;
+  onChangeTextField?: any;
 };
-
-const NormalMode = ({ subMode, onClick }: ModeProps) => {
+const NormalMode = ({
+  subMode,
+  onClick,
+  text,
+  onChangeTextField
+}: ModeProps) => {
   return (
     <>
       <FormControl fullWidth>
@@ -78,6 +84,8 @@ const NormalMode = ({ subMode, onClick }: ModeProps) => {
             label="メッセージ"
             variant="outlined"
             fullWidth
+            value={text}
+            onChange={onChangeTextField}
           />
         </Box>
       </FormControl>
@@ -144,6 +152,12 @@ const MenuTabs = ({ frequency }: MenuTabsProps) => {
     setSubMode(newValue);
   };
 
+  // テキストボックスの値
+  const [text, setText] = React.useState("");
+  const handleChangeTextField = (e: any) => {
+    setText(e.target.value);
+  };
+
   return (
     <>
       <Tabs
@@ -156,13 +170,18 @@ const MenuTabs = ({ frequency }: MenuTabsProps) => {
         <Tab label="妨害" />
       </Tabs>
       <CustomTabPanel value={value} index={0}>
-        <NormalMode subMode={subMode} onClick={handleChangeSubMode} />
+        <NormalMode
+          subMode={subMode}
+          onClick={handleChangeSubMode}
+          text={text}
+          onChangeTextField={handleChangeTextField}
+        />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         <SabotageMode subMode={subMode} onClick={handleChangeSubMode} />
       </CustomTabPanel>
       <Box pb={10}></Box>
-      <Footer mode={subMode} frequency={frequency} />
+      <Footer mode={subMode} frequency={frequency} text={text} />
     </>
   );
 };

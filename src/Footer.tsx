@@ -5,9 +5,10 @@ import { TextToMorse } from "./TextToMorse";
 type FooterProps = {
   mode: string;
   frequency: number;
+  text: string;
 };
 
-const Footer = ({ mode, frequency }: FooterProps) => {
+const Footer = ({ mode, frequency, text }: FooterProps) => {
   return (
     <Paper
       sx={{
@@ -27,7 +28,7 @@ const Footer = ({ mode, frequency }: FooterProps) => {
         <PlaySoundForFreeTime value="押してる間発信" frequency={frequency} />
       )}
       {mode === "translation-to-morse-code" && (
-        <TextToMorse text={"sos"} value="メッセージを再生" />
+        <TextToMorse text={text} value="メッセージを再生" />
       )}
       {mode === "abrasive-mosquitone" && (
         <PlaySoundMusic value="妨害音声を再生" />
