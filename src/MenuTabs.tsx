@@ -43,7 +43,7 @@ const NormalMode = ({
   subMode,
   onClick,
   text,
-  onChangeTextField
+  onChangeTextField,
 }: ModeProps) => {
   return (
     <>
@@ -75,7 +75,7 @@ const NormalMode = ({
             入力したメッセージをモールス信号に変換して再生します。
             <br />
             <span style={{ color: "#B00020" }}>注意：</span>
-            メッセージにはひらがな、カタカナ、アルファベットのみを使用してください。
+            メッセージにはひらがな、カタカナ、アルファベット、漢字を使用してください。漢字は自動的にひらがなに変換されます。
           </Box>
         </RadioGroup>
         <Box pl={4} pr={1}>
