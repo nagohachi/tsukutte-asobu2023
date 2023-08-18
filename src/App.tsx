@@ -26,6 +26,11 @@ function App() {
       <div>
         <CharToMorse char={"b"} />
       </div>
+      <div>
+        <PlaySoundMusic
+          value="妨害音声を再生"
+        />
+      </div>
     </>
   );
 }
