@@ -2,11 +2,15 @@ import "./App.css";
 import FrequencyBar from "./ FrequencyBar";
 import MenuTabs from "./MenuTabs";
 import {
-  PlaySoundForFixedTime,
+  // PlaySoundForFixedTime,
   PlaySoundForFreeTime,
   PlaySoundMusic,
 } from "./PlaySound";
-import { shortToneSeconds, longToneSeconds, frequency } from "./Params";
+import {
+  // shortToneSeconds,
+  // longToneSeconds,
+  frequency,
+} from "./Params";
 import { TextToMorse } from "./TextToMorse";
 import { TwoFingerSwipe } from "./Swipes";
 import "./App.css";
@@ -22,7 +26,7 @@ function App() {
           <FrequencyBar />
           <div>2本指でスワイプして電源偽装モードに切り替え</div>
           <MenuTabs />
-          <div>
+          {/* <div>
             <PlaySoundForFixedTime
               value="押下時に短音"
               seconds={shortToneSeconds}
@@ -35,7 +39,7 @@ function App() {
               seconds={longToneSeconds}
               frequency={frequency}
             />
-          </div>
+          </div> */}
           <div>
             <PlaySoundForFreeTime
               value="押下の間ずっと"
