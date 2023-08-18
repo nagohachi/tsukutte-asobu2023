@@ -45,6 +45,8 @@ interface PlaySoundProps {
   value: string;
   seconds?: number;
   frequency: number;
+  className?: string;
+  showIcon?: boolean;
 }
 
 interface PlayMusicProps {
@@ -78,7 +80,12 @@ export function PlaySoundForFixedTime({
  * @param {string} value ボタンに表示する文字列
  * @param {number} frequency 鳴らす音の周波数
  */
-export function PlaySoundForFreeTime({ value, frequency }: PlaySoundProps) {
+export function PlaySoundForFreeTime({
+  value,
+  frequency,
+  className,
+  showIcon = true,
+}: PlaySoundProps) {
   const [audioCtx] = useState(new window.AudioContext());
   const [oscillator, setOscillator] = useState<OscillatorNode | null>(null);
   const [status, setStatus] = useState(false);
@@ -111,8 +118,8 @@ export function PlaySoundForFreeTime({ value, frequency }: PlaySoundProps) {
   return (
     <CustomButton
       variant="outlined"
-      startIcon={status ? <StopIcon /> : <PlayArrowIcon />}
-      className="play__btn"
+      startIcon={showIcon ? status ? <StopIcon /> : <PlayArrowIcon /> : null}
+      className={`play__btn ${className}`}
       onMouseDown={startOscillator}
       onMouseUp={stopOscillator}
       onMouseLeave={stopOscillator}
