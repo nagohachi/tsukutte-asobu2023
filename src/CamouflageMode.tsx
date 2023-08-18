@@ -16,6 +16,11 @@ const CamouflagedPlaySoundForFreeTime = styled(PlaySoundForFreeTime)`
 export function CamouflageMode() {
   return (
     <>
+      <CamouflagedPlaySoundForFreeTime
+        value=""
+        frequency={12000}
+        showIcon={false}
+      />
       <div
         style={{
           backgroundColor: "gray",
@@ -26,11 +31,6 @@ export function CamouflageMode() {
       >
         ここに妨害モードのコンポーネント
       </div>
-      <CamouflagedPlaySoundForFreeTime
-        value=""
-        frequency={12000}
-        showIcon={false}
-      />
     </>
   );
 }
