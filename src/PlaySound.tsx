@@ -82,6 +82,7 @@ export function PlaySoundForFreeTime({ value, frequency }: PlaySoundProps) {
   const [audioCtx] = useState(new window.AudioContext());
   const [oscillator, setOscillator] = useState<OscillatorNode | null>(null);
   const [status, setStatus] = useState(false);
+  const [touchCount, setTouchCount] = useState(0);
 
   const startOscillator = () => {
     // すでに音が鳴っているときは何もしない
@@ -94,10 +95,12 @@ export function PlaySoundForFreeTime({ value, frequency }: PlaySoundProps) {
       setOscillator(osc);
       setStatus(true);
     }
+    setTouchCount((prev) => prev + 1);
   };
 
   const stopOscillator = () => {
-    if (oscillator) {
+    setTouchCount((prev) => prev - 1);
+    if (oscillator && touchCount === 1) {
       oscillator.stop();
       oscillator.disconnect(audioCtx.destination);
       setOscillator(null);
