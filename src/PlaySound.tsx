@@ -3,7 +3,6 @@ import { shortToneSeconds, longToneSeconds, CustomButton } from "./Params";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import StopIcon from "@mui/icons-material/Stop";
 import example from "./assets/musics/English.mp3";
-import noise from "./assets/musics/Noise.mp3";
 
 /**
  * seconds 秒間、frequency Hz の音を鳴らす
@@ -126,7 +125,7 @@ export function PlaySoundForFreeTime({ value, frequency }: PlaySoundProps) {
   );
 }
 
-/**
+/**リスニング音声を流す
  * @param {string} value ボタンに表示する文字列
  */
 const audio1 = new Audio(example);
@@ -155,26 +154,38 @@ export function PlaySoundMusic({ value }: PlayMusicProps) {
 }
 
 /**
+ * ボタンを押すとノイズを出し、再度押すと止まる
  * @param {string} value ボタンに表示する文字列
+ * @param {number} frequency 鳴らす音の周波数
  */
-const audio2 = new Audio(noise);
-export function PlaySoundNoise({ value }: PlayMusicProps) {
+export function PlaySoundNoise({ value, frequency }: PlaySoundProps) {
+  const [audioCtx] = useState(new window.AudioContext());
+  const [oscillator, setOscillator] = useState<OscillatorNode | null>(null);
   const [status, setStatus] = useState(false);
-  const music = (_: React.MouseEvent<HTMLButtonElement>) => {
-    if (!audio2.paused) {
-      audio2.pause();
-      setStatus(false);
-    } else {
-      audio2.play();
+
+  const noise = (_: React.MouseEvent<HTMLButtonElement>) => {
+    const osc = audioCtx.createOscillator();
+    if (!status) {
+      osc.type = "square";
+      osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+      osc.connect(audioCtx.destination);
+      osc.start();
+      setOscillator(osc);
       setStatus(true);
+    } else if (oscillator) {
+      oscillator.stop();
+      oscillator.disconnect(audioCtx.destination);
+      setOscillator(null);
+      setStatus(false);
     }
   };
+
   return (
     <CustomButton
       variant="outlined"
       startIcon={status ? <StopIcon /> : <PlayArrowIcon />}
       className="play__btn"
-      onClick={music}
+      onClick={noise}
       fullWidth
     >
       {value}
