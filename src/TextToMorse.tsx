@@ -208,22 +208,33 @@ function sleep(ms: number) {
  * 1文字をモールス信号に変換して再生する
  * @param {CharToMorseProps} char 変換する文字
  */
-export function CharToMorse({ char }: CharToMorseProps) {
+async function CharToMorse({ char }: CharToMorseProps) {
   if (!(char in morse)) return;
 
+  for (var i = 0; i < morse[char].length; i++) {
+    if (morse[char].charAt(i) === "0") {
+      await generateShortTone(frequency);
+    } else if (morse[char].charAt(i) === "1") {
+      await generateLongTone(frequency);
+    }
+    await sleep(spaceBetweenCharsMilliseconds);
+  }
+}
+
+type TextToMorseProps = {
+  text: string;
+};
+
+export function TextToMorse({ text }: TextToMorseProps) {
   const handleMousedown = async (_: React.MouseEvent<HTMLButtonElement>) => {
-    for (var i = 0; i < morse[char].length; i++) {
-      if (morse[char].charAt(i) === "0") {
-        await generateShortTone(frequency);
-      } else if (morse[char].charAt(i) === "1") {
-        await generateLongTone(frequency);
-      }
-      await sleep(spaceBetweenCharsMilliseconds);
+    for (let char of text) {
+      await CharToMorse({ char });
     }
   };
+
   return (
     <button className="play__btn" onClick={handleMousedown}>
-      ▶️ 'b' (1000) を再生
+      ▶️ {text} を再生
     </button>
   );
 }
