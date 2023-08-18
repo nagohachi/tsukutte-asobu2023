@@ -5,6 +5,7 @@ import {
   spaceBetweenCharsMilliseconds
 } from "./Params";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import axios from "axios";
 
 interface CharToMorseProps {
   char: string;
@@ -230,10 +231,45 @@ type TextToMorseProps = {
   text: string;
   value: string;
 };
+const APIKEY = import.meta.env.VITE_HIRAGANA_API_KEY;
 
 export function TextToMorse({ text, value }: TextToMorseProps) {
   const handleMousedown = async (_: React.MouseEvent<HTMLButtonElement>) => {
-    for (let char of text) {
+    let textArray: string[] = [];
+
+    let start = 0;
+    for (let i = 0; i < text.length; i++) {
+      if (text.charAt(i).match(/[a-zA-Z]/)) {
+        if (i != 0 && !text.charAt(i - 1).match(/[a-zA-Z]/)) {
+          textArray.push(text.slice(start, i));
+          start = i;
+        }
+        if (i != text.length - 1 && !text.charAt(i + 1).match(/[a-zA-Z]/)) {
+          textArray.push(text.slice(start, i + 1));
+          start = i + 1;
+        }
+      }
+      if (i === text.length - 1) {
+        textArray.push(text.slice(start, i + 1));
+      }
+    }
+
+    const convertedTextArray = await Promise.all(
+      textArray.map(async (v) => {
+        if (v.match(/^[a-zA-Z0-9]+$/)) {
+          return v;
+        }
+        const res = await axios.post("https://labs.goo.ne.jp/api/hiragana", {
+          app_id: APIKEY,
+          sentence: v,
+          output_type: "hiragana"
+        });
+
+        return res.data.converted.replace(/\s+/g, "");
+      })
+    );
+
+    for (let char of convertedTextArray.join("")) {
       await CharToMorse({ char });
     }
   };
