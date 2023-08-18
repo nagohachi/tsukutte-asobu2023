@@ -211,7 +211,6 @@ function sleep(ms: number) {
 async function CharToMorse({ char }: CharToMorseProps) {
   if (!(char in morse)) return;
 
-  // const handleMousedown = async (_: React.MouseEvent<HTMLButtonElement>) => {
   for (var i = 0; i < morse[char].length; i++) {
     if (morse[char].charAt(i) === "0") {
       await generateShortTone(frequency);
@@ -220,7 +219,6 @@ async function CharToMorse({ char }: CharToMorseProps) {
     }
     await sleep(spaceBetweenCharsMilliseconds);
   }
-  // };
 }
 
 type TextToMorseProps = {
