@@ -1,6 +1,5 @@
-import { styled } from "@mui/system";
-import { useSwipeable } from "react-swipeable";
 import { useState, useEffect } from "react";
+import { useSwipeable } from "react-swipeable";
 
 interface DoubleTouchThenSwipeProps {
   isCamouflage: boolean;
