@@ -1,4 +1,4 @@
-import { PlaySoundForFixedTime, PlaySoundForFreeTime } from "./PlaySound";
+import { PlaySoundForFixedTime, PlaySoundForFreeTime, PlaySoundMusic } from "./PlaySound";
 import { shortToneSeconds, longToneSeconds, frequency } from "./Params";
 import { TextToMorse } from "./TextToMorse";
 import "./App.css";
@@ -25,6 +25,11 @@ function App() {
       </div>
       <div>
         <TextToMorse text={"sos"} />
+      </div>
+      <div>
+        <PlaySoundMusic
+          value="妨害音声を再生"
+        />
       </div>
     </>
   );
