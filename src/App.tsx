@@ -1,7 +1,14 @@
-import { PlaySoundForFixedTime, PlaySoundForFreeTime } from "./PlaySound";
 import "./App.css";
 import FrequencyBar from "./ FrequencyBar";
 import MenuTabs from "./MenuTabs";
+import {
+  PlaySoundForFixedTime,
+  PlaySoundForFreeTime,
+  PlaySoundMusic
+} from "./PlaySound";
+import { shortToneSeconds, longToneSeconds, frequency } from "./Params";
+import { TextToMorse } from "./TextToMorse";
+import "./App.css";
 
 function App() {
   return (
@@ -12,19 +19,25 @@ function App() {
       <div>
         <PlaySoundForFixedTime
           value="押下時に短音"
-          seconds={0.3}
-          frequency={7040}
+          seconds={shortToneSeconds}
+          frequency={frequency}
         />
       </div>
       <div>
         <PlaySoundForFixedTime
           value="押下時に長音"
-          seconds={0.6}
-          frequency={7040}
+          seconds={longToneSeconds}
+          frequency={frequency}
         />
       </div>
       <div>
-        <PlaySoundForFreeTime value="押下の間ずっと" frequency={7040} />
+        <PlaySoundForFreeTime value="押下の間ずっと" frequency={frequency} />
+      </div>
+      <div>
+        <TextToMorse text={"sos"} />
+      </div>
+      <div>
+        <PlaySoundMusic value="妨害音声を再生" />
       </div>
     </>
   );
