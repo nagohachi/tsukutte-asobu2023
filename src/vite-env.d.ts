@@ -7,3 +7,4 @@ interface ImportMeta {
 }
 
 declare module "*.mp3";
+

@@ -2,6 +2,7 @@ import "./App.css";
 import FrequencyBar from "./ FrequencyBar";
 import MenuTabs from "./MenuTabs";
 import { DoubleTouchThenSwipe } from "./Swipes";
+import { CamouflageMode } from "./CamouflageMode";
 import { useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { themeOptions } from "./ThemeOptions";
@@ -19,13 +20,15 @@ function App() {
         isCamouflage={isCamouflage}
         setIsCamouflage={setIsCamouflage}
       />
+
       {!isCamouflage && (
         <ThemeProvider theme={theme}>
           <FrequencyBar frequency={frequency} setFrequency={setFrequency} />
           <Grid
             container
             spacing={1}
-            padding={2}
+            px={2}
+            py={0}
             sx={{ typography: "caption" }}
             alignItems="center"
           >
@@ -37,7 +40,7 @@ function App() {
           <MenuTabs frequency={frequency} />
         </ThemeProvider>
       )}
-      {isCamouflage && <h2>カモフラージュモード</h2>}
+      {isCamouflage && CamouflageMode()}
     </>
   );
 }
