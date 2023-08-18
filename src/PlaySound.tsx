@@ -3,6 +3,7 @@ import { shortToneSeconds, longToneSeconds, CustomButton } from "./Params";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import StopIcon from "@mui/icons-material/Stop";
 import example from "./assets/musics/English.mp3";
+import noise from "./assets/musics/Noise.mp3";
 
 /**
  * seconds 秒間、frequency Hz の音を鳴らす
@@ -128,15 +129,43 @@ export function PlaySoundForFreeTime({ value, frequency }: PlaySoundProps) {
 /**
  * @param {string} value ボタンに表示する文字列
  */
-const audio = new Audio(example);
+const audio1 = new Audio(example);
 export function PlaySoundMusic({ value }: PlayMusicProps) {
   const [status, setStatus] = useState(false);
   const music = (_: React.MouseEvent<HTMLButtonElement>) => {
-    if (!audio.paused) {
-      audio.pause();
+    if (!audio1.paused) {
+      audio1.pause();
       setStatus(false);
     } else {
-      audio.play();
+      audio1.play();
+      setStatus(true);
+    }
+  };
+  return (
+    <CustomButton
+      variant="outlined"
+      startIcon={status ? <StopIcon /> : <PlayArrowIcon />}
+      className="play__btn"
+      onClick={music}
+      fullWidth
+    >
+      {value}
+    </CustomButton>
+  );
+}
+
+/**
+ * @param {string} value ボタンに表示する文字列
+ */
+const audio2 = new Audio(noise);
+export function PlaySoundNoise({ value }: PlayMusicProps) {
+  const [status, setStatus] = useState(false);
+  const music = (_: React.MouseEvent<HTMLButtonElement>) => {
+    if (!audio2.paused) {
+      audio2.pause();
+      setStatus(false);
+    } else {
+      audio2.play();
       setStatus(true);
     }
   };
