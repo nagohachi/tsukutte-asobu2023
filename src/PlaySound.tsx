@@ -100,7 +100,7 @@ export function PlaySoundForFreeTime({ value, frequency }: PlaySoundProps) {
 
   const stopOscillator = () => {
     setTouchCount((prev) => prev - 1);
-    if (oscillator && touchCount === 1) {
+    if (oscillator && touchCount <= 1) {
       oscillator.stop();
       oscillator.disconnect(audioCtx.destination);
       setOscillator(null);
