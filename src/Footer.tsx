@@ -17,7 +17,8 @@ const Footer = ({ mode, frequency }: FooterProps) => {
         right: 0,
         px: 3,
         pt: 1,
-        pb: 4
+        pb: 4,
+        zIndex: 10000
       }}
       elevation={0}
       style={{ backgroundColor: "#114B3D", borderRadius: 0 }}
