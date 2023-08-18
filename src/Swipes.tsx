@@ -12,7 +12,6 @@ export function DoubleTouchThenSwipe({
 }: DoubleTouchThenSwipeProps) {
   const [tapCount, setTapCount] = useState(0);
   const [canSwipe, setCanSwipe] = useState(false);
-  const [background, setBackground] = useState("white");
   const [touchStartTime, setTouchStartTime] = useState<number | null>(null);
 
   useEffect(() => {
@@ -40,7 +39,6 @@ export function DoubleTouchThenSwipe({
   const handlers = useSwipeable({
     onSwipedUp: () => {
       if (canSwipe) {
-        setBackground(isCamouflage ? "red" : "white");
         setIsCamouflage(!isCamouflage);
         setCanSwipe(false);
         setTapCount(0);
@@ -56,7 +54,6 @@ export function DoubleTouchThenSwipe({
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       className="swipe-component"
-      style={{ backgroundColor: background }}
     ></div>
   );
 }
