@@ -59,7 +59,7 @@ interface PlayMusicProps {
 export function PlaySoundForFixedTime({
   value,
   seconds,
-  frequency
+  frequency,
 }: PlaySoundProps) {
   if (!seconds) return null;
 
@@ -82,19 +82,25 @@ export function PlaySoundForFreeTime({ value, frequency }: PlaySoundProps) {
   const [audioCtx] = useState(new window.AudioContext());
   const [oscillator, setOscillator] = useState<OscillatorNode | null>(null);
   const [status, setStatus] = useState(false);
+  const [touchCount, setTouchCount] = useState(0);
 
   const startOscillator = () => {
-    const osc = audioCtx.createOscillator();
-    osc.type = "square";
-    osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
-    osc.connect(audioCtx.destination);
-    osc.start();
-    setOscillator(osc);
-    setStatus(true);
+    // すでに音が鳴っているときは何もしない
+    if (!status) {
+      const osc = audioCtx.createOscillator();
+      osc.type = "square";
+      osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+      osc.connect(audioCtx.destination);
+      osc.start();
+      setOscillator(osc);
+      setStatus(true);
+    }
+    setTouchCount((prev) => prev + 1);
   };
 
   const stopOscillator = () => {
-    if (oscillator) {
+    setTouchCount((prev) => prev - 1);
+    if (oscillator && touchCount === 0) {
       oscillator.stop();
       oscillator.disconnect(audioCtx.destination);
       setOscillator(null);
@@ -110,6 +116,8 @@ export function PlaySoundForFreeTime({ value, frequency }: PlaySoundProps) {
       onMouseDown={startOscillator}
       onMouseUp={stopOscillator}
       onMouseLeave={stopOscillator}
+      onTouchStart={startOscillator}
+      onTouchEnd={stopOscillator}
       fullWidth
     >
       {value}
