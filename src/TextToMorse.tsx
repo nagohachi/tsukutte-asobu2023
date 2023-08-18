@@ -234,6 +234,11 @@ type TextToMorseProps = {
 
 const APIKEY = import.meta.env.VITE_HIRAGANA_API_KEY;
 
+/**
+ * 文章をモールス信号に変換して再生するコンポーネントを返す
+ * @param {TextToMorseProps} text 文章
+ * @param {TextToMorseProps} value ボタンに表示する文字列
+ */
 export function TextToMorse({ text, value }: TextToMorseProps) {
   const handleMousedown = async (_: React.MouseEvent<HTMLButtonElement>) => {
     let textArray: string[] = [];
