@@ -161,6 +161,7 @@ const MenuTabs = ({ frequency }: MenuTabsProps) => {
       <CustomTabPanel value={value} index={1}>
         <SabotageMode subMode={subMode} onClick={handleChangeSubMode} />
       </CustomTabPanel>
+      <Box pb={10}></Box>
       <Footer mode={subMode} frequency={frequency} />
     </>
   );
