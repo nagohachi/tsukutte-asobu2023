@@ -9,13 +9,25 @@ import MenuTabs from "./MenuTabs";
 // import { shortToneSeconds, longToneSeconds, frequency } from "./Params";
 // import { TextToMorse } from "./TextToMorse";
 import "./App.css";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { themeOptions } from "./ThemeOptions";
+import Grid from "@mui/material/Grid";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 function App() {
+  const theme = createTheme(themeOptions);
   return (
     <>
-      <FrequencyBar />
-      <div>2本指でスワイプして電源偽装モードに切り替え</div>
-      <MenuTabs />
+      <ThemeProvider theme={theme}>
+        <FrequencyBar />
+        <Grid container spacing={1} padding={2}>
+          <Grid item>
+            <InfoOutlinedIcon />
+          </Grid>
+          <Grid item>ダブルタップして上にスワイプで電源偽装</Grid>
+        </Grid>
+        <MenuTabs />
+      </ThemeProvider>
       {/* <div>
         <PlaySoundForFixedTime
           value="押下時に短音"

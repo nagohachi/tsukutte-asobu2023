@@ -13,12 +13,18 @@ const Footer = ({ mode }: FooterProps) => {
       : "妨害音声を再生";
   return (
     <Paper
-      sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
-      elevation={3}
+      sx={{
+        position: "fixed",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        px: 3,
+        pt: 1,
+        pb: 4
+      }}
+      elevation={0}
+      style={{ backgroundColor: "#114B3D", borderRadius: 0 }}
     >
-      {/* <Button variant="outlined" startIcon={<PlayArrowIcon />}>
-        {buttonText}
-      </Button> */}
       {mode === "manual-communication" && (
         <PlaySoundForFreeTime value={buttonText} frequency={7040} />
       )}

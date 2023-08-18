@@ -1,4 +1,6 @@
 import { Slider } from "@mui/material";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 
 const marks = [
   {
@@ -38,19 +40,37 @@ function valueLabelFormat(value: number) {
 function FrequencyBar() {
   return (
     <>
-      <div>周波数(Hz) 10,000 Hz</div>
-      <Slider
-        aria-label="frequency bar"
-        min={10000}
-        max={20000}
-        defaultValue={100000}
-        valueLabelFormat={valueLabelFormat}
-        getAriaValueText={valuetext}
-        step={null}
-        marks={marks}
-        valueLabelDisplay="on"
-      />
-      <div>目安年齢(歳)</div>
+      <Box sx={{ flexGrow: 1, p: 2, fontSize: "h5.fontSize" }}>
+        <Grid container spacing={0}>
+          <Grid item xs={"auto"}>
+            周波数(Hz)
+          </Grid>
+          <Grid item xs sx={{ textAlign: "right" }}>
+            <span
+              style={{ borderBottom: "solid 2px #e0e0e0", marginRight: "8px" }}
+            >
+              10,000
+            </span>
+            Hz
+          </Grid>
+        </Grid>
+      </Box>
+      <Box sx={{ p: 3 }}>
+        <Box sx={{ textAlign: "center" }}>周波数(Hz)</Box>
+        <Slider
+          aria-label="frequency bar"
+          min={10000}
+          max={20000}
+          defaultValue={12000}
+          valueLabelFormat={valueLabelFormat}
+          getAriaValueText={valuetext}
+          step={null}
+          marks={marks}
+          valueLabelDisplay="on"
+          sx={{ mt: 4 }}
+        />
+        <Box sx={{ textAlign: "center" }}>目安年齢(歳)</Box>
+      </Box>
     </>
   );
 }

@@ -50,21 +50,25 @@ const NormalMode = ({ subMode, onClick }: ModeProps) => {
           name="radio-buttons-group"
           value={subMode}
           onChange={onClick}
+          sx={{ mb: 3 }}
         >
           <FormControlLabel
             value="manual-communication"
             control={<Radio />}
             label="Manual Communication"
           />
-          手動でモースル信号を発します。
+          <Box pl={4}> 手動でモールス信号を発します。</Box>
           <FormControlLabel
-            value="translation-to-morse-code"
+            value={"translation-to-morse-code"}
             control={<Radio />}
             label="Translation to Morse Code"
           />
-          入力したメッセージをモールス信号に変換して再生します。
-          <br />
-          注意：メッセージにはひらがな、カタカナ、アルファベットのみを使用してください。
+          <Box pl={4}>
+            入力したメッセージをモールス信号に変換して再生します。
+            <br />
+            <span style={{ color: "#B00020" }}>注意：</span>
+            メッセージにはひらがな、カタカナ、アルファベットのみを使用してください。
+          </Box>
         </RadioGroup>
         <TextField id="outlined-basic" label="Outlined" variant="outlined" />
       </FormControl>
@@ -90,15 +94,20 @@ const SabotageMode = ({ subMode, onClick }: ModeProps) => {
             control={<Radio />}
             label="Abrasive Mosquitone"
           />
-          不快感を与える高音を継続的に再生し、集中力を削ります。
+          <Box pl={4}>
+            不快感を与える高音を継続的に再生し、集中力を削ります。
+          </Box>
           <FormControlLabel
             value="fake-listening-problems"
             control={<Radio />}
             label="Fake Listening Problems"
           />
-          ダミーのリスニング音声を再生し、リスニングテストをかく乱します。
-          <br />
-          注意：周波数の設定に関わらず、誰にでも聞こえる音声が再生されます。
+          <Box pl={4}>
+            ダミーのリスニング音声を再生し、リスニングテストをかく乱します。
+            <br />
+            <span style={{ color: "#B00020" }}>注意：</span>
+            周波数の設定に関わらず、誰にでも聞こえる音声が再生されます。
+          </Box>
         </RadioGroup>
       </FormControl>
     </>

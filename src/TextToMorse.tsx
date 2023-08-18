@@ -1,5 +1,9 @@
 import { generateShortTone, generateLongTone } from "./PlaySound";
-import { frequency, spaceBetweenCharsMilliseconds } from "./Params";
+import {
+  CustomButton,
+  frequency,
+  spaceBetweenCharsMilliseconds
+} from "./Params";
 import Button from "@mui/material/Button";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
@@ -236,13 +240,14 @@ export function TextToMorse({ text, value }: TextToMorseProps) {
   };
 
   return (
-    <Button
+    <CustomButton
       variant="outlined"
       startIcon={<PlayArrowIcon />}
       className="play__btn"
       onClick={handleMousedown}
+      fullWidth
     >
       {value}
-    </Button>
+    </CustomButton>
   );
 }

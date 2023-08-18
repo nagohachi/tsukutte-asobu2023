@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { shortToneSeconds, longToneSeconds } from "./Params";
+import { shortToneSeconds, longToneSeconds, CustomButton } from "./Params";
 import Button from "@mui/material/Button";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import StopIcon from "@mui/icons-material/Stop";
 
 /**
  * seconds 秒間、frequency Hz の音を鳴らす
@@ -80,6 +81,7 @@ export function PlaySoundForFixedTime({
 export function PlaySoundForFreeTime({ value, frequency }: PlaySoundProps) {
   const [audioCtx] = useState(new window.AudioContext());
   const [oscillator, setOscillator] = useState<OscillatorNode | null>(null);
+  const [status, setStatus] = useState(false);
 
   const startOscillator = () => {
     const osc = audioCtx.createOscillator();
@@ -88,6 +90,7 @@ export function PlaySoundForFreeTime({ value, frequency }: PlaySoundProps) {
     osc.connect(audioCtx.destination);
     osc.start();
     setOscillator(osc);
+    setStatus(true);
   };
 
   const stopOscillator = () => {
@@ -95,20 +98,22 @@ export function PlaySoundForFreeTime({ value, frequency }: PlaySoundProps) {
       oscillator.stop();
       oscillator.disconnect(audioCtx.destination);
       setOscillator(null);
+      setStatus(false);
     }
   };
 
   return (
-    <Button
+    <CustomButton
       variant="outlined"
-      startIcon={<PlayArrowIcon />}
+      startIcon={status ? <StopIcon /> : <PlayArrowIcon />}
       className="play__btn"
       onMouseDown={startOscillator}
       onMouseUp={stopOscillator}
       onMouseLeave={stopOscillator}
+      fullWidth
     >
       {value}
-    </Button>
+    </CustomButton>
   );
 }
 
@@ -121,13 +126,14 @@ export function PlaySoundMusic({ value }: PlayMusicProps) {
     audio.play();
   };
   return (
-    <Button
+    <CustomButton
       variant="outlined"
       startIcon={<PlayArrowIcon />}
       className="play__btn"
       onClick={music}
+      fullWidth
     >
       {value}
-    </Button>
+    </CustomButton>
   );
 }
