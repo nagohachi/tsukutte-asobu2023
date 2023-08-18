@@ -41,7 +41,7 @@ type ModeProps = {
 const NormalMode = ({ subMode, onClick }: ModeProps) => {
   return (
     <>
-      <FormControl>
+      <FormControl fullWidth>
         <FormLabel id="normal-mode-radio-buttons-group-label">
           通信モード
         </FormLabel>
@@ -57,20 +57,29 @@ const NormalMode = ({ subMode, onClick }: ModeProps) => {
             control={<Radio />}
             label="Manual Communication"
           />
-          <Box pl={4}> 手動でモールス信号を発します。</Box>
+          <Box pl={4} sx={{ typography: "caption" }}>
+            手動でモールス信号を発します。
+          </Box>
           <FormControlLabel
             value={"translation-to-morse-code"}
             control={<Radio />}
             label="Translation to Morse Code"
           />
-          <Box pl={4}>
+          <Box pl={4} sx={{ typography: "caption" }}>
             入力したメッセージをモールス信号に変換して再生します。
             <br />
             <span style={{ color: "#B00020" }}>注意：</span>
             メッセージにはひらがな、カタカナ、アルファベットのみを使用してください。
           </Box>
         </RadioGroup>
-        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+        <Box pl={4} pr={1}>
+          <TextField
+            id="outlined-basic"
+            label="メッセージ"
+            variant="outlined"
+            fullWidth
+          />
+        </Box>
       </FormControl>
     </>
   );
@@ -94,7 +103,11 @@ const SabotageMode = ({ subMode, onClick }: ModeProps) => {
             control={<Radio />}
             label="Abrasive Mosquitone"
           />
+<<<<<<< HEAD
+          <Box pl={4} sx={{ typography: "caption" }}>
+=======
           <Box pl={4}>
+>>>>>>> main
             不快感を与える高音を継続的に再生し、集中力を削ります。
           </Box>
           <FormControlLabel
@@ -102,7 +115,11 @@ const SabotageMode = ({ subMode, onClick }: ModeProps) => {
             control={<Radio />}
             label="Fake Listening Problems"
           />
+<<<<<<< HEAD
+          <Box pl={4} sx={{ typography: "caption" }}>
+=======
           <Box pl={4}>
+>>>>>>> main
             ダミーのリスニング音声を再生し、リスニングテストをかく乱します。
             <br />
             <span style={{ color: "#B00020" }}>注意：</span>
