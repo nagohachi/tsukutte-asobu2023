@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { shortToneSeconds, longToneSeconds } from "./Params";
+import { shortToneSeconds, longToneSeconds, CustomButton } from "./Params";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import StopIcon from "@mui/icons-material/Stop";
 import example from "./assets/musics/example.mp3";
 
 /**
@@ -57,7 +59,7 @@ interface PlayMusicProps {
 export function PlaySoundForFixedTime({
   value,
   seconds,
-  frequency,
+  frequency
 }: PlaySoundProps) {
   if (!seconds) return null;
 
@@ -79,6 +81,7 @@ export function PlaySoundForFixedTime({
 export function PlaySoundForFreeTime({ value, frequency }: PlaySoundProps) {
   const [audioCtx] = useState(new window.AudioContext());
   const [oscillator, setOscillator] = useState<OscillatorNode | null>(null);
+  const [status, setStatus] = useState(false);
 
   const startOscillator = () => {
     const osc = audioCtx.createOscillator();
@@ -87,6 +90,7 @@ export function PlaySoundForFreeTime({ value, frequency }: PlaySoundProps) {
     osc.connect(audioCtx.destination);
     osc.start();
     setOscillator(osc);
+    setStatus(true);
   };
 
   const stopOscillator = () => {
@@ -94,18 +98,22 @@ export function PlaySoundForFreeTime({ value, frequency }: PlaySoundProps) {
       oscillator.stop();
       oscillator.disconnect(audioCtx.destination);
       setOscillator(null);
+      setStatus(false);
     }
   };
 
   return (
-    <button
+    <CustomButton
+      variant="outlined"
+      startIcon={status ? <StopIcon /> : <PlayArrowIcon />}
       className="play__btn"
       onMouseDown={startOscillator}
       onMouseUp={stopOscillator}
       onMouseLeave={stopOscillator}
+      fullWidth
     >
-      ▶️ {value}
-    </button>
+      {value}
+    </CustomButton>
   );
 }
 
@@ -118,8 +126,14 @@ export function PlaySoundMusic({ value }: PlayMusicProps) {
     audio.play();
   };
   return (
-    <button className="play__btn" onClick={music}>
-      ▶️ {value}
-    </button>
+    <CustomButton
+      variant="outlined"
+      startIcon={<PlayArrowIcon />}
+      className="play__btn"
+      onClick={music}
+      fullWidth
+    >
+      {value}
+    </CustomButton>
   );
 }

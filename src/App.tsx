@@ -1,18 +1,31 @@
 import "./App.css";
 import FrequencyBar from "./ FrequencyBar";
 import MenuTabs from "./MenuTabs";
-import { PlaySoundForFreeTime, PlaySoundMusic } from "./PlaySound";
-import { frequency } from "./Params";
+// import { PlaySoundForFreeTime, PlaySoundMusic } from "./PlaySound";
+// import { frequency } from "./Params";
 // import { TextToMorse } from "./TextToMorse";
-import { DoubleTouchThenSwipe } from "./Swipes";
+// import { DoubleTouchThenSwipe } from "./Swipes";
 import { useState } from "react";
-import "./App.css";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { themeOptions } from "./ThemeOptions";
+import Grid from "@mui/material/Grid";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 function App() {
+  const theme = createTheme(themeOptions);
   const [isCamouflage, setIsCamouflage] = useState(false);
+
   return (
-    <>
-      <div className="container">
+    <ThemeProvider theme={theme}>
+      <FrequencyBar />
+      <Grid container spacing={1} padding={2}>
+        <Grid item>
+          <InfoOutlinedIcon />
+        </Grid>
+        <Grid item>ダブルタップして上にスワイプで電源偽装</Grid>
+      </Grid>
+      <MenuTabs />
+      {/* <div className="container">
         <section className="swipe-component__container">
           <DoubleTouchThenSwipe
             isCamouflage={isCamouflage}
@@ -29,15 +42,12 @@ function App() {
               frequency={frequency}
             />
           </span>
-          {/* <div>
-            <TextToMorse text={"sos"} />
-          </div> */}
           <span>
             <PlaySoundMusic value="妨害音声を再生" />
           </span>
         </section>
-      </div>
-    </>
+      </div> */}
+    </ThemeProvider>
   );
 }
 
