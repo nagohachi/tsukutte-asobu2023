@@ -67,3 +67,16 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+
+.swipe-component {
+  width: 100vw;
+  height: 90vh;
+  background-color: aquamarine;
+  opacity: 0.5;
+}
+
+.main-component__container {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { shortToneSeconds, longToneSeconds, CustomButton } from "./Params";
-import Button from "@mui/material/Button";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import StopIcon from "@mui/icons-material/Stop";
+import example from "./assets/musics/example.mp3";
 
 /**
  * seconds 秒間、frequency Hz の音を鳴らす
@@ -61,7 +61,7 @@ export function PlaySoundForFixedTime({
   seconds,
   frequency
 }: PlaySoundProps) {
-  if (!seconds) return;
+  if (!seconds) return null;
 
   const handleMousedown = (_: React.MouseEvent<HTMLButtonElement>) => {
     generateTone(seconds, frequency);
@@ -122,7 +122,7 @@ export function PlaySoundForFreeTime({ value, frequency }: PlaySoundProps) {
  */
 export function PlaySoundMusic({ value }: PlayMusicProps) {
   const music = (_: React.MouseEvent<HTMLButtonElement>) => {
-    const audio = new Audio("src/musics/example.mp3");
+    const audio = new Audio(example);
     audio.play();
   };
   return (
