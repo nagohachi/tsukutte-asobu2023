@@ -84,13 +84,16 @@ export function PlaySoundForFreeTime({ value, frequency }: PlaySoundProps) {
   const [status, setStatus] = useState(false);
 
   const startOscillator = () => {
-    const osc = audioCtx.createOscillator();
-    osc.type = "square";
-    osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
-    osc.connect(audioCtx.destination);
-    osc.start();
-    setOscillator(osc);
-    setStatus(true);
+    // すでに音が鳴っているときは何もしない
+    if (!status) {
+      const osc = audioCtx.createOscillator();
+      osc.type = "square";
+      osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+      osc.connect(audioCtx.destination);
+      osc.start();
+      setOscillator(osc);
+      setStatus(true);
+    }
   };
 
   const stopOscillator = () => {
