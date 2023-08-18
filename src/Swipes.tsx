@@ -11,9 +11,9 @@ export function DoubleTouchThenSwipe() {
       setCanSwipe(true);
       // 2秒後にリセット
       const timeout = setTimeout(() => {
-        setTapCount(0);
         setCanSwipe(false);
-      }, 2000);
+        setTapCount(0);
+      }, 1000);
       return () => clearTimeout(timeout);
     }
   }, [tapCount]);
@@ -25,14 +25,16 @@ export function DoubleTouchThenSwipe() {
   const handlers = useSwipeable({
     onSwipedUp: () => {
       if (canSwipe) {
-        console.log("Double tapped and swiped up!");
         setBackground("red");
+        setCanSwipe(false);
+        setTapCount(0);
       }
     },
     onSwipedDown: () => {
       if (canSwipe) {
-        console.log("Double tapped and swiped down!");
         setBackground("white");
+        setCanSwipe(false);
+        setTapCount(0);
       }
     },
     trackTouch: true,

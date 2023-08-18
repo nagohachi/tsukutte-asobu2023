@@ -5,6 +5,7 @@ import { PlaySoundForFreeTime, PlaySoundMusic } from "./PlaySound";
 import { frequency } from "./Params";
 import { TextToMorse } from "./TextToMorse";
 import { DoubleTouchThenSwipe } from "./Swipes";
+import { useState } from "react";
 import "./App.css";
 
 function App() {
