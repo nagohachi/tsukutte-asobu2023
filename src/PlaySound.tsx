@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { shortToneSeconds, longToneSeconds } from "./Params";
-import example from "./assets/musics/example.mp3";
 
 /**
  * seconds 秒間、frequency Hz の音を鳴らす
@@ -112,10 +111,14 @@ export function PlaySoundForFreeTime({ value, frequency }: PlaySoundProps) {
 /**
  * @param {string} value ボタンに表示する文字列
  */
-export function PlaySoundMusic({ value }: PlayMusicProps) {
+export function PlaySoundMusic({value}: PlayMusicProps) {
+  const audio = new Audio("src/assets//musics/English.mp3");
   const music = (_: React.MouseEvent<HTMLButtonElement>) => {
-    const audio = new Audio(example);
-    audio.play();
+    if (!audio.paused) {
+      audio.pause();
+    }else {
+      audio.play();
+    }
   };
   return (
     <button className="play__btn" onClick={music}>
