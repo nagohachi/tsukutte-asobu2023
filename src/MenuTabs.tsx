@@ -103,7 +103,11 @@ const SabotageMode = ({ subMode, onClick }: ModeProps) => {
             control={<Radio />}
             label="Abrasive Mosquitone"
           />
+<<<<<<< HEAD
           <Box pl={4} sx={{ typography: "caption" }}>
+=======
+          <Box pl={4}>
+>>>>>>> main
             不快感を与える高音を継続的に再生し、集中力を削ります。
           </Box>
           <FormControlLabel
@@ -111,7 +115,11 @@ const SabotageMode = ({ subMode, onClick }: ModeProps) => {
             control={<Radio />}
             label="Fake Listening Problems"
           />
+<<<<<<< HEAD
           <Box pl={4} sx={{ typography: "caption" }}>
+=======
+          <Box pl={4}>
+>>>>>>> main
             ダミーのリスニング音声を再生し、リスニングテストをかく乱します。
             <br />
             <span style={{ color: "#B00020" }}>注意：</span>
