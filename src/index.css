@@ -71,8 +71,8 @@ button:focus-visible {
 .swipe-component {
   width: 100vw;
   height: 100vh;
-  z-index: -100;
   background-color: aquamarine;
+  opacity: 0.5;
 }
 
 .main-component__container {

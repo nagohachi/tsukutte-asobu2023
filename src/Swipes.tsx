@@ -1,27 +1,38 @@
 import { useSwipeable } from "react-swipeable";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export function TwoFingerSwipe() {
+export function DoubleTouchThenSwipe() {
+  const [tapCount, setTapCount] = useState(0);
+  const [canSwipe, setCanSwipe] = useState(false);
   const [background, setBackground] = useState("white");
+
+  useEffect(() => {
+    if (tapCount === 2) {
+      setCanSwipe(true);
+      // 2秒後にリセット
+      const timeout = setTimeout(() => {
+        setTapCount(0);
+        setCanSwipe(false);
+      }, 2000);
+      return () => clearTimeout(timeout);
+    }
+  }, [tapCount]);
+
+  const handleTouchEnd = () => {
+    setTapCount((prev) => prev + 1);
+  };
+
   const handlers = useSwipeable({
-    onSwiping: (eventData) => {
-      const nativeEvent = eventData.event as TouchEvent;
-      if (eventData.dir === "Up") {
-        if (nativeEvent.touches.length === 2) {
-          console.log("swiped UP with 2 fingers");
-          setBackground("yellow");
-        } else if (nativeEvent.touches.length === 1) {
-          console.log("swiped UP with 1 finger");
-          setBackground("blue");
-        }
-      } else if (eventData.dir === "Down") {
-        if (nativeEvent.touches.length === 2) {
-          console.log("swiped DOWN with 2 fingers");
-          setBackground("green");
-        } else if (nativeEvent.touches.length === 1) {
-          console.log("swiped DOWN with 1 finger");
-          setBackground("red");
-        }
+    onSwipedUp: () => {
+      if (canSwipe) {
+        console.log("Double tapped and swiped up!");
+        setBackground("red");
+      }
+    },
+    onSwipedDown: () => {
+      if (canSwipe) {
+        console.log("Double tapped and swiped down!");
+        setBackground("white");
       }
     },
     trackTouch: true,
@@ -31,10 +42,9 @@ export function TwoFingerSwipe() {
   return (
     <div
       {...handlers}
+      onTouchEnd={handleTouchEnd}
       className="swipe-component"
       style={{ backgroundColor: background }}
     ></div>
   );
 }
-
-export default TwoFingerSwipe;

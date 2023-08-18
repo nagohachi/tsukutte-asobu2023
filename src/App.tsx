@@ -1,18 +1,10 @@
 import "./App.css";
 import FrequencyBar from "./ FrequencyBar";
 import MenuTabs from "./MenuTabs";
-import {
-  // PlaySoundForFixedTime,
-  PlaySoundForFreeTime,
-  PlaySoundMusic,
-} from "./PlaySound";
-import {
-  // shortToneSeconds,
-  // longToneSeconds,
-  frequency,
-} from "./Params";
+import { PlaySoundForFreeTime, PlaySoundMusic } from "./PlaySound";
+import { frequency } from "./Params";
 import { TextToMorse } from "./TextToMorse";
-import { TwoFingerSwipe } from "./Swipes";
+import { DoubleTouchThenSwipe } from "./Swipes";
 import "./App.css";
 
 function App() {
@@ -20,26 +12,12 @@ function App() {
     <>
       <div className="container">
         <section className="swipe-component__container">
-          <TwoFingerSwipe />
+          <DoubleTouchThenSwipe />
         </section>
         <section className="main-component__container">
           <FrequencyBar />
-          <div>2本指でスワイプして電源偽装モードに切り替え</div>
+          <div>2本指でタッチ & 上スワイプして電源偽装モードに切り替え</div>
           <MenuTabs />
-          {/* <div>
-            <PlaySoundForFixedTime
-              value="押下時に短音"
-              seconds={shortToneSeconds}
-              frequency={frequency}
-            />
-          </div>
-          <div>
-            <PlaySoundForFixedTime
-              value="押下時に長音"
-              seconds={longToneSeconds}
-              frequency={frequency}
-            />
-          </div> */}
           <div>
             <PlaySoundForFreeTime
               value="押下の間ずっと"
