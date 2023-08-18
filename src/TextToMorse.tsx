@@ -4,7 +4,6 @@ import {
   frequency,
   spaceBetweenCharsMilliseconds
 } from "./Params";
-import Button from "@mui/material/Button";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
 interface CharToMorseProps {

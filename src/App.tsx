@@ -13,14 +13,20 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 function App() {
   const theme = createTheme(themeOptions);
-  const [isCamouflage, setIsCamouflage] = useState(false);
+  // const [isCamouflage, setIsCamouflage] = useState(false);
 
   return (
     <ThemeProvider theme={theme}>
       <FrequencyBar />
-      <Grid container spacing={1} padding={2}>
+      <Grid
+        container
+        spacing={1}
+        padding={2}
+        sx={{ typography: "caption" }}
+        alignItems="center"
+      >
         <Grid item>
-          <InfoOutlinedIcon />
+          <InfoOutlinedIcon sx={{ display: "flex" }} />
         </Grid>
         <Grid item>ダブルタップして上にスワイプで電源偽装</Grid>
       </Grid>
