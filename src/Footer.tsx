@@ -8,10 +8,6 @@ type FooterProps = {
 };
 
 const Footer = ({ mode, frequency }: FooterProps) => {
-  const buttonText =
-    mode === "manual-communication" || mode === "translation-to-morse-code"
-      ? "押してる間発信"
-      : "妨害音声を再生";
   return (
     <Paper
       sx={{
@@ -21,20 +17,22 @@ const Footer = ({ mode, frequency }: FooterProps) => {
         right: 0,
         px: 3,
         pt: 1,
-        pb: 4,
+        pb: 4
       }}
       elevation={0}
       style={{ backgroundColor: "#114B3D", borderRadius: 0 }}
     >
       {mode === "manual-communication" && (
-        <PlaySoundForFreeTime value={buttonText} frequency={frequency} />
+        <PlaySoundForFreeTime value="押してる間発信" frequency={frequency} />
       )}
       {mode === "translation-to-morse-code" && (
-        <TextToMorse text={"sos"} value={buttonText} />
+        <TextToMorse text={"sos"} value="メッセージを再生" />
       )}
-      {mode === "abrasive-mosquitone" && <PlaySoundMusic value={buttonText} />}
+      {mode === "abrasive-mosquitone" && (
+        <PlaySoundMusic value="妨害音声を再生" />
+      )}
       {mode === "fake-listening-problems" && (
-        <PlaySoundMusic value={buttonText} />
+        <PlaySoundMusic value="リスニング音声を再生" />
       )}
     </Paper>
   );
