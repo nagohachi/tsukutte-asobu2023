@@ -59,7 +59,7 @@ export function PlaySoundForFixedTime({
   seconds,
   frequency,
 }: PlaySoundProps) {
-  if (!seconds) return;
+  if (!seconds) return null;
 
   const handleMousedown = (_: React.MouseEvent<HTMLButtonElement>) => {
     generateTone(seconds, frequency);
