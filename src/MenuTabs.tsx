@@ -112,6 +112,7 @@ const SabotageMode = ({ subMode, onClick }: ModeProps) => {
             label="Fake Listening Problems"
           />
           <Box pl={4} sx={{ typography: "caption" }}>
+
             ダミーのリスニング音声を再生し、リスニングテストをかく乱します。
             <br />
             <span style={{ color: "#B00020" }}>注意：</span>
