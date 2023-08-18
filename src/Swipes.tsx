@@ -2,45 +2,46 @@ import { useSwipeable } from "react-swipeable";
 import { useState, useEffect } from "react";
 
 interface DoubleTouchThenSwipeProps {
+  isCamouflage: boolean;
   setIsCamouflage: (isCamouflage: boolean) => void;
 }
 
 export function DoubleTouchThenSwipe({
+  isCamouflage,
   setIsCamouflage,
 }: DoubleTouchThenSwipeProps) {
   const [tapCount, setTapCount] = useState(0);
   const [canSwipe, setCanSwipe] = useState(false);
   const [background, setBackground] = useState("white");
+  const [touchStartTime, setTouchStartTime] = useState<number | null>(null);
 
   useEffect(() => {
     if (tapCount === 2) {
       setCanSwipe(true);
-      // 2秒後にリセット
       const timeout = setTimeout(() => {
         setCanSwipe(false);
         setTapCount(0);
-      }, 1000);
+      }, 600);
       return () => clearTimeout(timeout);
     }
   }, [tapCount]);
 
+  const handleTouchStart = () => {
+    setTouchStartTime(Date.now());
+  };
+
   const handleTouchEnd = () => {
-    setTapCount((prev) => prev + 1);
+    if (touchStartTime && Date.now() - touchStartTime < 100) {
+      setTapCount((prev) => prev + 1);
+    }
+    setTouchStartTime(null);
   };
 
   const handlers = useSwipeable({
     onSwipedUp: () => {
       if (canSwipe) {
-        setBackground("red");
-        setIsCamouflage(true);
-        setCanSwipe(false);
-        setTapCount(0);
-      }
-    },
-    onSwipedDown: () => {
-      if (canSwipe) {
-        setBackground("white");
-        setIsCamouflage(false);
+        setBackground(isCamouflage ? "red" : "white");
+        setIsCamouflage(!isCamouflage);
         setCanSwipe(false);
         setTapCount(0);
       }
@@ -52,6 +53,7 @@ export function DoubleTouchThenSwipe({
   return (
     <div
       {...handlers}
+      onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       className="swipe-component"
       style={{ backgroundColor: background }}
