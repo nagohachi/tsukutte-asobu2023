@@ -265,13 +265,20 @@ export function TextToMorse({ text, value }: TextToMorseProps) {
         if (v.match(/^[a-zA-Z0-9]+$/)) {
           return v;
         }
-        const res = await axios.post("https://labs.goo.ne.jp/api/hiragana", {
-          app_id: APIKEY,
-          sentence: v,
-          output_type: "hiragana",
-        });
-
-        return res.data.converted.replace(/\s+/g, "");
+        try {
+          const res = await axios.post("https://labs.goo.ne.jp/api/hiragana", {
+            app_id: APIKEY,
+            sentence: v,
+            output_type: "hiragana",
+          });
+          return res.data.converted.replace(/\s+/g, "");
+        } catch (error: any) {
+          if (error.response) {
+            console.log("Error data:", error.response.data);
+          } else {
+            console.log("Error:", error.message);
+          }
+        }
       })
     );
 
