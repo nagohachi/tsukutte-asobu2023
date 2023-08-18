@@ -1,4 +1,4 @@
-import { PlaySoundForFixedTime, PlaySoundForFreeTime } from "./PlaySound";
+import { PlaySoundForFixedTime, PlaySoundForFreeTime, PlaySoundMusic } from "./PlaySound";
 import { shortToneSeconds, longToneSeconds, frequency } from "./Params";
 import { CharToMorse } from "./TextToMorse";
 import "./App.css";

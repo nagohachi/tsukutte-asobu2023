@@ -115,7 +115,7 @@ export function PlaySoundMusic({
   value,
 }: PlayMusicProps) {
   const music = (_: React.MouseEvent<HTMLButtonElement>) => {
-    const audio = new Audio("musics/example.mp3");
+    const audio = new Audio("./musics/example.mp3");
     audio.play();
   };
   return (
