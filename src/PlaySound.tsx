@@ -59,7 +59,7 @@ interface PlayMusicProps {
 export function PlaySoundForFixedTime({
   value,
   seconds,
-  frequency
+  frequency,
 }: PlaySoundProps) {
   if (!seconds) return null;
 
@@ -110,6 +110,8 @@ export function PlaySoundForFreeTime({ value, frequency }: PlaySoundProps) {
       onMouseDown={startOscillator}
       onMouseUp={stopOscillator}
       onMouseLeave={stopOscillator}
+      onTouchStart={startOscillator}
+      onTouchEnd={stopOscillator}
       fullWidth
     >
       {value}
