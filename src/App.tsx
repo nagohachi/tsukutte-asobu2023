@@ -25,7 +25,8 @@ function App() {
           <Grid
             container
             spacing={1}
-            padding={2}
+            px={2}
+            py={0}
             sx={{ typography: "caption" }}
             alignItems="center"
           >
