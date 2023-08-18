@@ -47,7 +47,7 @@ const NormalMode = ({
 }: ModeProps) => {
   return (
     <>
-      <FormControl fullWidth sx={{ mb: 30 }}>
+      <FormControl fullWidth sx={{ mb: 60 }}>
         <FormLabel id="normal-mode-radio-buttons-group-label">
           通信モード
         </FormLabel>
@@ -96,7 +96,7 @@ const NormalMode = ({
 const SabotageMode = ({ subMode, onClick }: ModeProps) => {
   return (
     <>
-      <FormControl>
+      <FormControl sx={{ mb: 60 }}>
         <FormLabel id="sabotage-mode-radio-buttons-group-label">
           妨害モード
         </FormLabel>
