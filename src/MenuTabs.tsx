@@ -114,7 +114,11 @@ const SabotageMode = ({ subMode, onClick }: ModeProps) => {
   );
 };
 
-const MenuTabs = () => {
+type MenuTabsProps = {
+  frequency: number;
+};
+
+const MenuTabs = ({ frequency }: MenuTabsProps) => {
   // normal or sabotage
   const [value, setValue] = React.useState(0);
   const handleChangeValue = (_: React.SyntheticEvent, newValue: number) => {
@@ -148,7 +152,7 @@ const MenuTabs = () => {
       <CustomTabPanel value={value} index={1}>
         <SabotageMode subMode={subMode} onClick={handleChangeSubMode} />
       </CustomTabPanel>
-      <Footer mode={subMode} />
+      <Footer mode={subMode} frequency={frequency} />
     </>
   );
 };

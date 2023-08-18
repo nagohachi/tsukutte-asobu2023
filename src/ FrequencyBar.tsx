@@ -5,28 +5,28 @@ import Grid from "@mui/material/Grid";
 const marks = [
   {
     value: 10000,
-    label: "~70"
+    label: "~70",
   },
   {
     value: 12000,
-    label: "~60"
+    label: "~60",
   },
   {
     value: 14000,
-    label: "~50"
+    label: "~50",
   },
   {
     value: 15000,
-    label: "~40"
+    label: "~40",
   },
   {
     value: 16000,
-    label: "~30"
+    label: "~30",
   },
   {
     value: 20000,
-    label: "~20"
-  }
+    label: "~20",
+  },
 ];
 
 function valuetext(value: number) {
@@ -37,7 +37,17 @@ function valueLabelFormat(value: number) {
   return value.toLocaleString();
 }
 
-function FrequencyBar() {
+interface FrequencyBarProps {
+  frequency: number;
+  setFrequency: (frequency: number) => void;
+}
+
+function FrequencyBar({ frequency, setFrequency }: FrequencyBarProps) {
+  const handleSliderChange = (_: Event, newValue: number | number[]) => {
+    // newValueはnumber | number[]の型を持つので、number型にキャストしています。
+    setFrequency(newValue as number);
+  };
+
   return (
     <>
       <Box sx={{ flexGrow: 1, p: 2, fontSize: "h5.fontSize" }}>
@@ -62,6 +72,8 @@ function FrequencyBar() {
           min={10000}
           max={20000}
           defaultValue={12000}
+          value={frequency}
+          onChange={handleSliderChange}
           valueLabelFormat={valueLabelFormat}
           getAriaValueText={valuetext}
           step={null}
