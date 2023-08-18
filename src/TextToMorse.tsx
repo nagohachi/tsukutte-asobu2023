@@ -2,7 +2,7 @@ import { generateShortTone, generateLongTone } from "./PlaySound";
 import {
   CustomButton,
   frequency,
-  spaceBetweenCharsMilliseconds
+  spaceBetweenCharsMilliseconds,
 } from "./Params";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import axios from "axios";
@@ -199,7 +199,7 @@ const morse: { [key: string]: string } = {
   8: "11100",
   9: "11110",
   0: "11111",
-  ー: "01101"
+  ー: "01101",
 };
 
 /**
@@ -231,6 +231,7 @@ type TextToMorseProps = {
   text: string;
   value: string;
 };
+
 const APIKEY = import.meta.env.VITE_HIRAGANA_API_KEY;
 
 export function TextToMorse({ text, value }: TextToMorseProps) {
@@ -262,7 +263,7 @@ export function TextToMorse({ text, value }: TextToMorseProps) {
         const res = await axios.post("https://labs.goo.ne.jp/api/hiragana", {
           app_id: APIKEY,
           sentence: v,
-          output_type: "hiragana"
+          output_type: "hiragana",
         });
 
         return res.data.converted.replace(/\s+/g, "");
