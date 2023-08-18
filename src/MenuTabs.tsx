@@ -47,7 +47,7 @@ const NormalMode = ({
 }: ModeProps) => {
   return (
     <>
-      <FormControl fullWidth>
+      <FormControl fullWidth sx={{ mb: 30 }}>
         <FormLabel id="normal-mode-radio-buttons-group-label">
           通信モード
         </FormLabel>

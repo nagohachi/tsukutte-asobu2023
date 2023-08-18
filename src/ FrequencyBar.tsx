@@ -50,7 +50,7 @@ function FrequencyBar({ frequency, setFrequency }: FrequencyBarProps) {
 
   return (
     <>
-      <Box sx={{ flexGrow: 1, p: 2, fontSize: "h5.fontSize" }}>
+      <Box sx={{ flexGrow: 1, p: 2, pb: 1, fontSize: "h5.fontSize" }}>
         <Grid container spacing={0}>
           <Grid item xs={"auto"} sx={{ fontFamily: "Noto Sans JP" }}>
             周波数(Hz)
@@ -65,7 +65,7 @@ function FrequencyBar({ frequency, setFrequency }: FrequencyBarProps) {
           </Grid>
         </Grid>
       </Box>
-      <Box sx={{ p: 3 }}>
+      <Box sx={{ px: 3, pt: 0, pb: 1 }}>
         <Box sx={{ textAlign: "center", fontFamily: "Noto Sans JP" }}>
           周波数(Hz)
         </Box>
