@@ -1,5 +1,7 @@
 import { generateShortTone, generateLongTone } from "./PlaySound";
 import { frequency, spaceBetweenCharsMilliseconds } from "./Params";
+import Button from "@mui/material/Button";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
 interface CharToMorseProps {
   char: string;
@@ -193,7 +195,7 @@ const morse: { [key: string]: string } = {
   8: "11100",
   9: "11110",
   0: "11111",
-  ー: "01101",
+  ー: "01101"
 };
 
 /**
@@ -223,9 +225,10 @@ async function CharToMorse({ char }: CharToMorseProps) {
 
 type TextToMorseProps = {
   text: string;
+  value: string;
 };
 
-export function TextToMorse({ text }: TextToMorseProps) {
+export function TextToMorse({ text, value }: TextToMorseProps) {
   const handleMousedown = async (_: React.MouseEvent<HTMLButtonElement>) => {
     for (let char of text) {
       await CharToMorse({ char });
@@ -233,8 +236,13 @@ export function TextToMorse({ text }: TextToMorseProps) {
   };
 
   return (
-    <button className="play__btn" onClick={handleMousedown}>
-      ▶️ {text} を再生
-    </button>
+    <Button
+      variant="outlined"
+      startIcon={<PlayArrowIcon />}
+      className="play__btn"
+      onClick={handleMousedown}
+    >
+      {value}
+    </Button>
   );
 }

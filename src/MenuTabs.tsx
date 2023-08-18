@@ -9,6 +9,7 @@ import FormLabel from "@mui/material/FormLabel";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Footer from "./Footer";
+import { useState } from "react";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -32,7 +33,12 @@ const CustomTabPanel = (props: TabPanelProps) => {
   );
 };
 
-const NormalMode = () => {
+type ModeProps = {
+  subMode: string;
+  onClick: any;
+};
+
+const NormalMode = ({ subMode, onClick }: ModeProps) => {
   return (
     <>
       <FormControl>
@@ -41,8 +47,9 @@ const NormalMode = () => {
         </FormLabel>
         <RadioGroup
           aria-labelledby="normal-mode-radio-buttons-group-label"
-          defaultValue="manual-communication"
           name="radio-buttons-group"
+          value={subMode}
+          onChange={onClick}
         >
           <FormControlLabel
             value="manual-communication"
@@ -65,50 +72,61 @@ const NormalMode = () => {
   );
 };
 
-const SabotageMode = () => {
+const SabotageMode = ({ subMode, onClick }: ModeProps) => {
   return (
-    <FormControl>
-      <FormLabel id="sabotage-mode-radio-buttons-group-label">
-        妨害モード
-      </FormLabel>
-      <RadioGroup
-        aria-labelledby="sabotage-mode-radio-buttons-group-label"
-        defaultValue="abrasive-mosquitone"
-        name="radio-buttons-group"
-      >
-        <FormControlLabel
-          value="abrasive-mosquitone"
-          control={<Radio />}
-          label="Abrasive Mosquitone"
-        />
-        不快感を与える高音を継続的に再生し、集中力を削ります。
-        <FormControlLabel
-          value="fake-listening-problems"
-          control={<Radio />}
-          label="Fake Listening Problems"
-        />
-        ダミーのリスニング音声を再生し、リスニングテストをかく乱します。
-        <br />
-        注意：周波数の設定に関わらず、誰にでも聞こえる音声が再生されます。
-      </RadioGroup>
-    </FormControl>
+    <>
+      <FormControl>
+        <FormLabel id="sabotage-mode-radio-buttons-group-label">
+          妨害モード
+        </FormLabel>
+        <RadioGroup
+          aria-labelledby="sabotage-mode-radio-buttons-group-label"
+          name="radio-buttons-group"
+          value={subMode}
+          onChange={onClick}
+        >
+          <FormControlLabel
+            value="abrasive-mosquitone"
+            control={<Radio />}
+            label="Abrasive Mosquitone"
+          />
+          不快感を与える高音を継続的に再生し、集中力を削ります。
+          <FormControlLabel
+            value="fake-listening-problems"
+            control={<Radio />}
+            label="Fake Listening Problems"
+          />
+          ダミーのリスニング音声を再生し、リスニングテストをかく乱します。
+          <br />
+          注意：周波数の設定に関わらず、誰にでも聞こえる音声が再生されます。
+        </RadioGroup>
+      </FormControl>
+    </>
   );
 };
 
 const MenuTabs = () => {
+  // normal or sabotage
   const [value, setValue] = React.useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChangeValue = (_: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    newValue == 0
+      ? setSubMode("manual-communication")
+      : setSubMode("abrasive-mosquitone");
   };
 
-  const mode = value == 0 ? "normal" : "sabotage";
+  // 各モード内のラジオボタン
+  const [subMode, setSubMode] = useState("manual-communication");
+
+  const handleChangeSubMode = (_: React.SyntheticEvent, newValue: string) => {
+    setSubMode(newValue);
+  };
 
   return (
     <>
       <Tabs
         value={value}
-        onChange={handleChange}
+        onChange={handleChangeValue}
         aria-label="menu tabs"
         variant="fullWidth"
       >
@@ -116,12 +134,12 @@ const MenuTabs = () => {
         <Tab label="妨害" />
       </Tabs>
       <CustomTabPanel value={value} index={0}>
-        <NormalMode />
+        <NormalMode subMode={subMode} onClick={handleChangeSubMode} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <SabotageMode />
+        <SabotageMode subMode={subMode} onClick={handleChangeSubMode} />
       </CustomTabPanel>
-      <Footer mode={mode} />
+      <Footer mode={subMode} />
     </>
   );
 };
