@@ -1,7 +1,13 @@
 import { useSwipeable } from "react-swipeable";
 import { useState, useEffect } from "react";
 
-export function DoubleTouchThenSwipe() {
+interface DoubleTouchThenSwipeProps {
+  setIsCamouflage: (isCamouflage: boolean) => void;
+}
+
+export function DoubleTouchThenSwipe({
+  setIsCamouflage,
+}: DoubleTouchThenSwipeProps) {
   const [tapCount, setTapCount] = useState(0);
   const [canSwipe, setCanSwipe] = useState(false);
   const [background, setBackground] = useState("white");
@@ -26,6 +32,7 @@ export function DoubleTouchThenSwipe() {
     onSwipedUp: () => {
       if (canSwipe) {
         setBackground("red");
+        setIsCamouflage(true);
         setCanSwipe(false);
         setTapCount(0);
       }
@@ -33,6 +40,7 @@ export function DoubleTouchThenSwipe() {
     onSwipedDown: () => {
       if (canSwipe) {
         setBackground("white");
+        setIsCamouflage(false);
         setCanSwipe(false);
         setTapCount(0);
       }

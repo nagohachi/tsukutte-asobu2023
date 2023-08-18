@@ -9,11 +9,12 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
+  const [_, setIsCamouflage] = useState(false);
   return (
     <>
       <div className="container">
         <section className="swipe-component__container">
-          <DoubleTouchThenSwipe />
+          <DoubleTouchThenSwipe setIsCamouflage={setIsCamouflage} />
         </section>
         <section className="main-component__container">
           <FrequencyBar />
