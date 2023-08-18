@@ -111,11 +111,9 @@ export function PlaySoundForFreeTime({ value, frequency }: PlaySoundProps) {
 /**
  * @param {string} value ボタンに表示する文字列
  */
-export function PlaySoundMusic({
-  value,
-}: PlayMusicProps) {
+export function PlaySoundMusic({ value }: PlayMusicProps) {
   const music = (_: React.MouseEvent<HTMLButtonElement>) => {
-    const audio = new Audio("src/musics/example.mp3");
+    const audio = new Audio("src/assets/musics/example.mp3");
     audio.play();
   };
   return (
