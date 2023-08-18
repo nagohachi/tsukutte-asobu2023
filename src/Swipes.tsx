@@ -7,6 +7,12 @@ interface DoubleTouchThenSwipeProps {
   className?: string;
 }
 
+/**
+ * 2回タップしてから上にスワイプすると偽装モードにするかどうかを切り替えるコンポーネント
+ * @param {boolean} isCamouflage 偽装モードかどうか
+ * @param {function} setIsCamouflage 偽装モードかどうかを変更する関数
+ * @param {string} className　スタイルを当てるためのクラス名
+ */
 export function DoubleTouchThenSwipe({
   isCamouflage,
   setIsCamouflage,
