@@ -7,6 +7,6 @@ export default defineConfig({
   build: {
     outDir: "../dist",
   },
-  base: "tsukutte-asobu2023",
+  base: "/tsukutte-asobu2023/",
   plugins: [react()],
 });
