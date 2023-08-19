@@ -6,7 +6,7 @@ import {
 } from "./Params";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import axios from "axios";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 interface CharToMorseProps {
   char: string;
