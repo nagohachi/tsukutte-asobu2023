@@ -1,7 +1,12 @@
 import { styled } from "@mui/system";
-import { PlaySoundForFreeTime } from "./PlaySound";
+import {
+  PlaySoundForFreeTime,
+  PlaySoundForFreeTimeWithSimpleButton,
+} from "./PlaySound";
 
-const CamouflagedPlaySoundForFreeTime = styled(PlaySoundForFreeTime)`
+const CamouflagedPlaySoundForFreeTime = styled(
+  PlaySoundForFreeTimeWithSimpleButton
+)`
   background-color: black;
   width: 100%;
   height: 33vh;
@@ -16,11 +21,7 @@ const CamouflagedPlaySoundForFreeTime = styled(PlaySoundForFreeTime)`
 export function CamouflageMode() {
   return (
     <>
-      <CamouflagedPlaySoundForFreeTime
-        value=""
-        frequency={12000}
-        showIcon={false}
-      />
+      <CamouflagedPlaySoundForFreeTime value="" frequency={12000} />
       <div
         style={{
           backgroundColor: "gray",
