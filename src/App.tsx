@@ -24,7 +24,6 @@ function App() {
 
       {!isCamouflage && (
         <ThemeProvider theme={theme}>
-          <Box mt={10}></Box>
           <FrequencyBar frequency={frequency} setFrequency={setFrequency} />
           <Grid
             container
