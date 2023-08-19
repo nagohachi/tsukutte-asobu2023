@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { shortToneSeconds, longToneSeconds, CustomButton } from "./Params";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import StopIcon from "@mui/icons-material/Stop";
@@ -203,8 +203,17 @@ export function PlaySoundForFreeTimeWithSimpleButton({
 const audio1 = new Audio(example);
 export function PlaySoundMusic({ value }: PlayMusicProps) {
   const [status, setStatus] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      console.log("playsoundmusic unmouted");
+      audio1.pause();
+      audio1.currentTime = 0;
+    };
+  }, []);
+
   const music = (_: React.MouseEvent<HTMLButtonElement>) => {
-    if (!audio1.paused) {
+    if (status) {
       audio1.pause();
       setStatus(false);
     } else {

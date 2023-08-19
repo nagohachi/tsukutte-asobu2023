@@ -5,6 +5,7 @@ import {
   PlaySoundNoise
 } from "./PlaySound";
 import { TextToMorse } from "./TextToMorse";
+import { memo } from "react";
 
 type FooterProps = {
   mode: string;
@@ -44,4 +45,4 @@ const Footer = ({ mode, frequency, text }: FooterProps) => {
   );
 };
 
-export default Footer;
+export default memo(Footer);
