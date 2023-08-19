@@ -1,5 +1,8 @@
 import { styled } from "@mui/system";
-import { PlaySoundForFreeTimeWithSimpleButton } from "./PlaySound";
+import {
+  PlaySoundForFreeTimeWithSimpleButton,
+  PlaySoundNoiseWithSimpleButton,
+} from "./PlaySound";
 
 const CamouflagedPlaySoundForFreeTime = styled(
   PlaySoundForFreeTimeWithSimpleButton
@@ -7,28 +10,19 @@ const CamouflagedPlaySoundForFreeTime = styled(
   background-color: black;
   width: 100%;
   height: 33vh;
-  &:active {
-    background-color: black;
-  }
-  &:hover {
-    background-color: black;
-  }
+`;
+
+const CamouflagedPlaySoundNoise = styled(PlaySoundNoiseWithSimpleButton)`
+  background-color: black;
+  width: 100%;
+  height: 33vh;
 `;
 
 export function CamouflageMode() {
   return (
     <>
       <CamouflagedPlaySoundForFreeTime value="" frequency={12000} />
-      <div
-        style={{
-          backgroundColor: "gray",
-          width: "100%",
-          height: "33vh",
-          textAlign: "center",
-        }}
-      >
-        ここに妨害モードのコンポーネント
-      </div>
+      <CamouflagedPlaySoundNoise value="" frequency={7000} />
     </>
   );
 }
