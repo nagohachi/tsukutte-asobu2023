@@ -23,6 +23,6 @@ export const CustomButton = styled(Button)({
   },
   "&:active": {
     boxShadow: "none",
-    backgroundColor: "#c1d0cd"
+    backgroundColor: "#e2c8d7"
   }
 });
