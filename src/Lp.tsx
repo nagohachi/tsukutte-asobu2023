@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import Button from '@mui/material/Button';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 function Lp() {
   return (
     <>
       <div style={{ margin: '0 10%' }}>
         <img style={{ display: 'block', margin: 'auto', width: '20%' }} src="src/assets/img/icon.png" alt="Application Name" />
-        <h3>正々堂々じゃ、<br/>立ち行かないこともある。<br />
-          ちょっぴりズルくて耳聡い、<br/>そんな大人のカンニングアプリ。</h3>
+        <h3>正々堂々じゃ、<br />立ち行かないこともある。<br />
+          ちょっぴりズルくて耳聡い、<br />そんな大人のカンニングアプリ。</h3>
         <p style={{ margin: '0' }}>「」は、モールス信号とモスキート音を組み合わせた通信機能と、周囲の受験者への妨害機能を備えたカンニングアプリです。</p>
         <ul>
           <li>通信モード
@@ -29,7 +30,13 @@ function Lp() {
           </li>
         </ul>
         <p style={{ margin: '0' }}>遷移先のページをホーム画面に追加してご使用ください。</p>
-        <div style={{ width:'100%', margin: '0 20%'}}>
+        <p style={{ margin: '0' }}>使い方の詳細は→
+          <Link to='https://github.com/yukihira-pot/tsukutte-asobu2023'>
+            <GitHubIcon></GitHubIcon>
+          </Link>
+        </p>
+
+        <div style={{ width: '100%', margin: '0 20%' }}>
           <Link to="/tsukutte-asobu2023">
             <Button variant="contained" href="#contained-buttons">
               カンニングを始める
