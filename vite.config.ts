@@ -15,8 +15,8 @@ export default defineConfig({
       registerType: "autoUpdate",
       includeAssets: ["apple-touch-icon.png"],
       manifest: {
-        theme_color: "#8E2A66",
-        background_color: "#8E2A66",
+        theme_color: "#000000",
+        background_color: "#000000",
         display: "fullscreen",
         scope: "/tsukutte-asobu2023/",
         start_url: "/tsukutte-asobu2023/",
