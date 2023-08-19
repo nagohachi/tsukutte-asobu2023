@@ -63,7 +63,9 @@ export function DoubleTouchThenSwipe({
         height: "100vh",
         zIndex: -1,
       }
-    : {};
+    : {
+        zIndex: 100,
+      };
 
   return (
     <div

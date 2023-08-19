@@ -47,7 +47,7 @@ const NormalMode = ({
 }: ModeProps) => {
   return (
     <>
-      <FormControl fullWidth sx={{ mb: 60 }}>
+      <FormControl fullWidth sx={{ mb: 10 }}>
         <FormLabel id="normal-mode-radio-buttons-group-label">
           通信モード
         </FormLabel>
@@ -60,7 +60,7 @@ const NormalMode = ({
         >
           <FormControlLabel
             value="manual-communication"
-            control={<Radio />}
+            control={<Radio sx={{ zIndex: 200 }} />}
             label="Manual Communication"
           />
           <Box pl={4} sx={{ typography: "caption" }}>
@@ -68,14 +68,14 @@ const NormalMode = ({
           </Box>
           <FormControlLabel
             value={"translation-to-morse-code"}
-            control={<Radio />}
+            control={<Radio sx={{ zIndex: 200 }} />}
             label="Translation to Morse Code"
           />
           <Box pl={4} sx={{ typography: "caption" }}>
             入力したメッセージをモールス信号に変換して再生します。
             <br />
             <span style={{ color: "#B00020" }}>注意：</span>
-            メッセージにはひらがな、カタカナ、アルファベットのみを使用してください。
+            メッセージにはひらがな、カタカナ、アルファベット、漢字を使用してください。漢字は自動的にひらがなに変換されます。
           </Box>
         </RadioGroup>
         <Box pl={4} pr={1}>
@@ -86,6 +86,7 @@ const NormalMode = ({
             fullWidth
             value={text}
             onChange={onChangeTextField}
+            sx={{ zIndex: 200 }}
           />
         </Box>
       </FormControl>
@@ -96,7 +97,7 @@ const NormalMode = ({
 const SabotageMode = ({ subMode, onClick }: ModeProps) => {
   return (
     <>
-      <FormControl sx={{ mb: 60 }}>
+      <FormControl sx={{ mb: 10 }}>
         <FormLabel id="sabotage-mode-radio-buttons-group-label">
           妨害モード
         </FormLabel>
@@ -108,7 +109,7 @@ const SabotageMode = ({ subMode, onClick }: ModeProps) => {
         >
           <FormControlLabel
             value="abrasive-mosquitone"
-            control={<Radio />}
+            control={<Radio sx={{ zIndex: 200 }} />}
             label="Abrasive Mosquitone"
           />
           <Box pl={4} sx={{ typography: "caption" }}>
@@ -116,7 +117,7 @@ const SabotageMode = ({ subMode, onClick }: ModeProps) => {
           </Box>
           <FormControlLabel
             value="fake-listening-problems"
-            control={<Radio />}
+            control={<Radio sx={{ zIndex: 200 }} />}
             label="Fake Listening Problems"
           />
           <Box pl={4} sx={{ typography: "caption" }}>
@@ -166,8 +167,8 @@ const MenuTabs = ({ frequency }: MenuTabsProps) => {
         aria-label="menu tabs"
         variant="fullWidth"
       >
-        <Tab label="通信" />
-        <Tab label="妨害" />
+        <Tab label="通信" sx={{ zIndex: 200 }} />
+        <Tab label="妨害" sx={{ zIndex: 200 }} />
       </Tabs>
       <CustomTabPanel value={value} index={0}>
         <NormalMode
@@ -180,7 +181,6 @@ const MenuTabs = ({ frequency }: MenuTabsProps) => {
       <CustomTabPanel value={value} index={1}>
         <SabotageMode subMode={subMode} onClick={handleChangeSubMode} />
       </CustomTabPanel>
-      <Box pb={10}></Box>
       <Footer mode={subMode} frequency={frequency} text={text} />
     </>
   );

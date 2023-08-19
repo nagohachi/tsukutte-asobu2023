@@ -1,8 +1,5 @@
 import { styled } from "@mui/system";
-import {
-  PlaySoundForFreeTime,
-  PlaySoundForFreeTimeWithSimpleButton,
-} from "./PlaySound";
+import { PlaySoundForFreeTimeWithSimpleButton } from "./PlaySound";
 
 const CamouflagedPlaySoundForFreeTime = styled(
   PlaySoundForFreeTimeWithSimpleButton

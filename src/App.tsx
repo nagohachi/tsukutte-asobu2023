@@ -28,7 +28,7 @@ function App() {
             container
             spacing={1}
             px={2}
-            py={0}
+            py={1}
             sx={{ typography: "caption" }}
             alignItems="center"
           >

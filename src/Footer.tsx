@@ -1,5 +1,5 @@
 import Paper from "@mui/material/Paper";
-import { PlaySoundForFreeTime, PlaySoundMusic } from "./PlaySound";
+import { PlaySoundForFreeTime, PlaySoundMusic, PlaySoundNoise } from "./PlaySound";
 import { TextToMorse } from "./TextToMorse";
 
 type FooterProps = {
@@ -31,7 +31,7 @@ const Footer = ({ mode, frequency, text }: FooterProps) => {
         <TextToMorse text={text} value="メッセージを再生" />
       )}
       {mode === "abrasive-mosquitone" && (
-        <PlaySoundMusic value="妨害音声を再生" />
+        <PlaySoundNoise value="妨害音声を再生" frequency={frequency}/>
       )}
       {mode === "fake-listening-problems" && (
         <PlaySoundMusic value="リスニング音声を再生" />
