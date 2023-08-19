@@ -264,3 +264,45 @@ export function PlaySoundNoise({ value, frequency }: PlaySoundProps) {
     </CustomButton>
   );
 }
+
+/**
+ * ボタンを押すとノイズを出し、再度押すと止まる
+ * @param {string} value ボタンに表示する文字列
+ * @param {number} frequency 鳴らす音の周波数
+ */
+export function PlaySoundNoiseWithSimpleButton({
+  value,
+  frequency,
+  className,
+}: PlaySoundProps) {
+  const [audioCtx] = useState(new window.AudioContext());
+  const [oscillator, setOscillator] = useState<OscillatorNode | null>(null);
+  const [status, setStatus] = useState(false);
+
+  const noise = (_: React.MouseEvent<HTMLButtonElement>) => {
+    const osc = audioCtx.createOscillator();
+    if (!status) {
+      osc.type = "square";
+      osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+      osc.connect(audioCtx.destination);
+      osc.start();
+      setOscillator(osc);
+      setStatus(true);
+    } else if (oscillator) {
+      oscillator.stop();
+      oscillator.disconnect(audioCtx.destination);
+      setOscillator(null);
+      setStatus(false);
+    }
+  };
+
+  return (
+    <button
+      className={`play__btn ${className}`}
+      onClick={noise}
+      style={{ border: "none" }}
+    >
+      {value}
+    </button>
+  );
+}
