@@ -1,4 +1,3 @@
-import zIndex from "@mui/material/styles/zIndex";
 import { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
 
