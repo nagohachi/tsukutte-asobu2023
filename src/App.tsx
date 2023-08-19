@@ -8,7 +8,6 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import { themeOptions } from "./ThemeOptions";
 import Grid from "@mui/material/Grid";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import Box from "@mui/material/Box";
 
 function App() {
   const theme = createTheme(themeOptions);
