@@ -86,14 +86,20 @@ export function PlaySoundForFreeTime({
   className,
   showIcon = true,
 }: PlaySoundProps) {
-  const [audioCtx] = useState(new window.AudioContext());
+  const [audioCtx, setAudioCtx] = useState<null | AudioContext>(null);
   const [oscillator, setOscillator] = useState<OscillatorNode | null>(null);
   const [status, setStatus] = useState(false);
   const [touchCount, setTouchCount] = useState(0);
 
   const startOscillator = () => {
+    if (!audioCtx) {
+      setAudioCtx(new window.AudioContext());
+    }
+
     // すでに音が鳴っているときは何もしない
-    if (!status) {
+    console.log("start oscillator");
+
+    if (!status && audioCtx) {
       const osc = audioCtx.createOscillator();
       osc.type = "square";
       osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
@@ -107,7 +113,7 @@ export function PlaySoundForFreeTime({
 
   const stopOscillator = () => {
     setTouchCount((prev) => prev - 1);
-    if (oscillator && touchCount <= 1) {
+    if (oscillator && touchCount <= 1 && audioCtx) {
       oscillator.stop();
       oscillator.disconnect(audioCtx.destination);
       setOscillator(null);
@@ -142,14 +148,18 @@ export function PlaySoundForFreeTimeWithSimpleButton({
   frequency,
   className,
 }: PlaySoundProps) {
-  const [audioCtx] = useState(new window.AudioContext());
+  const [audioCtx, setAudioCtx] = useState<null | AudioContext>(null);
   const [oscillator, setOscillator] = useState<OscillatorNode | null>(null);
   const [status, setStatus] = useState(false);
   const [touchCount, setTouchCount] = useState(0);
 
   const startOscillator = () => {
+    if (!audioCtx) {
+      setAudioCtx(new window.AudioContext());
+    }
+    console.log("start oscillator");
     // すでに音が鳴っているときは何もしない
-    if (!status) {
+    if (!status && audioCtx) {
       const osc = audioCtx.createOscillator();
       osc.type = "square";
       osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
@@ -163,7 +173,7 @@ export function PlaySoundForFreeTimeWithSimpleButton({
 
   const stopOscillator = () => {
     setTouchCount((prev) => prev - 1);
-    if (oscillator && touchCount <= 1) {
+    if (oscillator && touchCount <= 1 && audioCtx) {
       oscillator.stop();
       oscillator.disconnect(audioCtx.destination);
       setOscillator(null);
@@ -179,6 +189,7 @@ export function PlaySoundForFreeTimeWithSimpleButton({
       onMouseLeave={stopOscillator}
       onTouchStart={startOscillator}
       onTouchEnd={stopOscillator}
+      style={{ border: "none" }}
     >
       {value}
     </button>

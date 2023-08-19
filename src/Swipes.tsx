@@ -58,9 +58,10 @@ export function DoubleTouchThenSwipe({
 
   const camouflageStyle = isCamouflage
     ? {
-        backgroundColor: "gray",
+        backgroundColor: "black",
         width: "100%",
         height: "100vh",
+        zIndex: -1,
       }
     : {};
 
