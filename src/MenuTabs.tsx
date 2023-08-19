@@ -97,7 +97,7 @@ const NormalMode = ({
 const SabotageMode = ({ subMode, onClick }: ModeProps) => {
   return (
     <>
-      <FormControl>
+      <FormControl sx={{ mb: 10 }}>
         <FormLabel id="sabotage-mode-radio-buttons-group-label">
           妨害モード
         </FormLabel>
