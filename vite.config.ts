@@ -9,5 +9,19 @@ export default defineConfig({
     outDir: "./dist"
   },
   base: "/tsukutte-asobu2023/",
-  plugins: [react(), VitePWA({ registerType: "autoUpdate" })]
+  plugins: [
+    react(),
+    VitePWA({
+      registerType: "autoUpdate",
+      manifest: {
+        icons: [
+          {
+            src: "/pwaicon.png",
+            sizes: "144x144",
+            type: "image/png"
+          }
+        ]
+      }
+    })
+  ]
 });
