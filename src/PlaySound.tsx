@@ -61,7 +61,7 @@ interface PlayMusicProps {
 export function PlaySoundForFixedTime({
   value,
   seconds,
-  frequency
+  frequency,
 }: PlaySoundProps) {
   if (!seconds) return null;
 
@@ -84,7 +84,7 @@ export function PlaySoundForFreeTime({
   value,
   frequency,
   className,
-  showIcon = true
+  showIcon = true,
 }: PlaySoundProps) {
   const [audioCtx] = useState(new window.AudioContext());
   const [oscillator, setOscillator] = useState<OscillatorNode | null>(null);
@@ -141,6 +141,7 @@ export function PlaySoundMusic({ value }: PlayMusicProps) {
 
   useEffect(() => {
     return () => {
+      console.log("playsoundmusic unmouted");
       audio1.pause();
       audio1.currentTime = 0;
     };
