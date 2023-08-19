@@ -16,7 +16,7 @@ interface DoubleTouchThenSwipeProps {
 export function DoubleTouchThenSwipe({
   isCamouflage,
   setIsCamouflage,
-  className
+  className,
 }: DoubleTouchThenSwipeProps) {
   const [tapCount, setTapCount] = useState(0);
   const [canSwipe, setCanSwipe] = useState(false);
@@ -53,17 +53,18 @@ export function DoubleTouchThenSwipe({
       }
     },
     trackTouch: true,
-    trackMouse: false
+    trackMouse: false,
   });
 
   const camouflageStyle = isCamouflage
     ? {
-        backgroundColor: "gray",
+        backgroundColor: "black",
         width: "100%",
-        height: "100vh"
+        height: "100vh",
+        zIndex: -1,
       }
     : {
-        zIndex: 100
+        zIndex: 100,
       };
 
   return (

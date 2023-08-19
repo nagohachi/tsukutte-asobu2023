@@ -86,14 +86,20 @@ export function PlaySoundForFreeTime({
   className,
   showIcon = true,
 }: PlaySoundProps) {
-  const [audioCtx] = useState(new window.AudioContext());
+  const [audioCtx, setAudioCtx] = useState<null | AudioContext>(null);
   const [oscillator, setOscillator] = useState<OscillatorNode | null>(null);
   const [status, setStatus] = useState(false);
   const [touchCount, setTouchCount] = useState(0);
 
   const startOscillator = () => {
+    if (!audioCtx) {
+      setAudioCtx(new window.AudioContext());
+    }
+
     // すでに音が鳴っているときは何もしない
-    if (!status) {
+    console.log("start oscillator");
+
+    if (!status && audioCtx) {
       const osc = audioCtx.createOscillator();
       osc.type = "square";
       osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
@@ -107,7 +113,7 @@ export function PlaySoundForFreeTime({
 
   const stopOscillator = () => {
     setTouchCount((prev) => prev - 1);
-    if (oscillator && touchCount <= 1) {
+    if (oscillator && touchCount <= 1 && audioCtx) {
       oscillator.stop();
       oscillator.disconnect(audioCtx.destination);
       setOscillator(null);
@@ -132,6 +138,65 @@ export function PlaySoundForFreeTime({
   );
 }
 
+/**
+ * ボタンを押している間だけ音を鳴らす
+ * @param {string} value ボタンに表示する文字列
+ * @param {number} frequency 鳴らす音の周波数
+ */
+export function PlaySoundForFreeTimeWithSimpleButton({
+  value,
+  frequency,
+  className,
+}: PlaySoundProps) {
+  const [audioCtx, setAudioCtx] = useState<null | AudioContext>(null);
+  const [oscillator, setOscillator] = useState<OscillatorNode | null>(null);
+  const [status, setStatus] = useState(false);
+  const [touchCount, setTouchCount] = useState(0);
+
+  const startOscillator = () => {
+    if (!audioCtx) {
+      setAudioCtx(new window.AudioContext());
+    }
+    console.log("start oscillator");
+    // すでに音が鳴っているときは何もしない
+    if (!status && audioCtx) {
+      const osc = audioCtx.createOscillator();
+      osc.type = "square";
+      osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+      osc.connect(audioCtx.destination);
+      osc.start();
+      setOscillator(osc);
+      setStatus(true);
+    }
+    setTouchCount((prev) => prev + 1);
+  };
+
+  const stopOscillator = () => {
+    setTouchCount((prev) => prev - 1);
+    if (oscillator && touchCount <= 1 && audioCtx) {
+      oscillator.stop();
+      oscillator.disconnect(audioCtx.destination);
+      setOscillator(null);
+      setStatus(false);
+    }
+  };
+
+  return (
+    <button
+      className={`play__btn ${className}`}
+      onMouseDown={startOscillator}
+      onMouseUp={stopOscillator}
+      onMouseLeave={stopOscillator}
+      onTouchStart={startOscillator}
+      onTouchEnd={stopOscillator}
+      style={{ border: "none" }}
+    >
+      {value}
+    </button>
+  );
+}
+
+/**
 /**リスニング音声を流す
  * @param {string} value ボタンに表示する文字列
  */
