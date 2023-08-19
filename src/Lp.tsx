@@ -28,7 +28,7 @@ function Lp() {
             </ul>
           </li>
         </ul>
-        <p style={{ margin: '0' }}>ホーム画面に追加して素晴らしいカンニングライフを送りましょう！</p>
+        <p style={{ margin: '0' }}>遷移先のページをホーム画面に追加してご使用ください。</p>
         <div style={{ width:'100%', margin: '0 20%'}}>
           <Link to="/tsukutte-asobu2023">
             <Button variant="contained" href="#contained-buttons">
