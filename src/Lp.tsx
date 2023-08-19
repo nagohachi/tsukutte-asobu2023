@@ -6,8 +6,8 @@ function Lp() {
     <>
       <div style={{ margin: '0 10%' }}>
         <img style={{ display: 'block', margin: 'auto', width: '20%' }} src="src/assets/img/icon.png" alt="Application Name" />
-        <h2 style={{ margin: '16px 10%' }}>正々堂々じゃ、立ち行かないこともある。<br />
-          ちょっぴりズルくて耳聡い、そんな大人のカンニングアプリ。</h2>
+        <h3>正々堂々じゃ、<br/>立ち行かないこともある。<br />
+          ちょっぴりズルくて耳聡い、<br/>そんな大人のカンニングアプリ。</h3>
         <p style={{ margin: '0' }}>「」は、モールス信号とモスキート音を組み合わせた通信機能と、周囲の受験者への妨害機能を備えたカンニングアプリです。</p>
         <ul>
           <li>通信モード
@@ -29,7 +29,7 @@ function Lp() {
           </li>
         </ul>
         <p style={{ margin: '0' }}>ホーム画面に追加して素晴らしいカンニングライフを送りましょう！</p>
-        <div style={{ margin: '16px 40%'}}>
+        <div style={{ width:'100%', margin: '0 20%'}}>
           <Link to="/tsukutte-asobu2023">
             <Button variant="contained" href="#contained-buttons">
               カンニングを始める
