@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 import Button from '@mui/material/Button';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import iconSrc from "./assets/img/icon.png";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { themeOptions } from "./ThemeOptions";
 
 function Lp() {
+  const theme = createTheme(themeOptions);
   return (
     <>
       <div style={{ margin: '0 10%' }}>
@@ -41,11 +44,13 @@ function Lp() {
         </p>
 
         <div style={{ width: '100%', margin: '0 20%' }}>
-          <Link to="/tsukutte-asobu2023">
-            <Button variant="contained" href="#contained-buttons">
-              カンニングを始める
-            </Button>
-          </Link>
+          <ThemeProvider theme={theme}>
+            <Link to="/tsukutte-asobu2023">
+              <Button variant="contained" href="#contained-buttons">
+                カンニングを始める
+              </Button>
+            </Link></ThemeProvider>
+
         </div>
       </div>
     </>
