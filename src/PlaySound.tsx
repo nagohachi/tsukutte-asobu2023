@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { shortToneSeconds, longToneSeconds, CustomButton } from "./Params";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import StopIcon from "@mui/icons-material/Stop";
@@ -61,7 +61,7 @@ interface PlayMusicProps {
 export function PlaySoundForFixedTime({
   value,
   seconds,
-  frequency,
+  frequency
 }: PlaySoundProps) {
   if (!seconds) return null;
 
@@ -84,7 +84,7 @@ export function PlaySoundForFreeTime({
   value,
   frequency,
   className,
-  showIcon = true,
+  showIcon = true
 }: PlaySoundProps) {
   const [audioCtx] = useState(new window.AudioContext());
   const [oscillator, setOscillator] = useState<OscillatorNode | null>(null);
@@ -138,8 +138,16 @@ export function PlaySoundForFreeTime({
 const audio1 = new Audio(example);
 export function PlaySoundMusic({ value }: PlayMusicProps) {
   const [status, setStatus] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      audio1.pause();
+      audio1.currentTime = 0;
+    };
+  }, []);
+
   const music = (_: React.MouseEvent<HTMLButtonElement>) => {
-    if (!audio1.paused) {
+    if (status) {
       audio1.pause();
       setStatus(false);
     } else {
