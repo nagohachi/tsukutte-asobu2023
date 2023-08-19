@@ -2,8 +2,7 @@ import Paper from "@mui/material/Paper";
 import {
   PlaySoundForFreeTime,
   PlaySoundMusic,
-  PlaySoundNoise,
-
+  PlaySoundNoise
 } from "./PlaySound";
 import { TextToMorse } from "./TextToMorse";
 import { memo } from "react";
@@ -25,7 +24,7 @@ const Footer = ({ mode, frequency, text }: FooterProps) => {
         px: 3,
         pt: 1,
         pb: 4,
-        zIndex: 10000,
+        zIndex: 10000
       }}
       elevation={0}
       style={{ backgroundColor: "#8E2A66", borderRadius: 0 }}
