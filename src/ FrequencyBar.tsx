@@ -81,7 +81,7 @@ function FrequencyBar({ frequency, setFrequency }: FrequencyBarProps) {
           step={null}
           marks={marks}
           valueLabelDisplay="on"
-          sx={{ mt: 4 }}
+          sx={{ mt: 4, zIndex: 200 }}
         />
         <Box sx={{ textAlign: "center", fontFamily: "Noto Sans JP" }}>
           目安年齢(歳)
