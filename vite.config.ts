@@ -8,7 +8,7 @@ export default defineConfig({
   build: {
     outDir: "./dist",
   },
-  base: "/tsukutte-asobu2023/lp/",
+  base: "/tsukutte-asobu2023/",
   plugins: [
     react(),
     VitePWA({
