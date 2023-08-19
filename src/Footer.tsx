@@ -1,5 +1,9 @@
 import Paper from "@mui/material/Paper";
-import { PlaySoundForFreeTime, PlaySoundMusic, PlaySoundNoise } from "./PlaySound";
+import {
+  PlaySoundForFreeTime,
+  PlaySoundMusic,
+  PlaySoundNoise
+} from "./PlaySound";
 import { TextToMorse } from "./TextToMorse";
 
 type FooterProps = {
@@ -22,7 +26,7 @@ const Footer = ({ mode, frequency, text }: FooterProps) => {
         zIndex: 10000
       }}
       elevation={0}
-      style={{ backgroundColor: "#114B3D", borderRadius: 0 }}
+      style={{ backgroundColor: "#8E2A66", borderRadius: 0 }}
     >
       {mode === "manual-communication" && (
         <PlaySoundForFreeTime value="押してる間発信" frequency={frequency} />
@@ -31,7 +35,7 @@ const Footer = ({ mode, frequency, text }: FooterProps) => {
         <TextToMorse text={text} value="メッセージを再生" />
       )}
       {mode === "abrasive-mosquitone" && (
-        <PlaySoundNoise value="妨害音声を再生" frequency={frequency}/>
+        <PlaySoundNoise value="妨害音声を再生" frequency={frequency} />
       )}
       {mode === "fake-listening-problems" && (
         <PlaySoundMusic value="リスニング音声を再生" />
