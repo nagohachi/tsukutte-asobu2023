@@ -3,6 +3,7 @@ import {
   PlaySoundForFreeTime,
   PlaySoundMusic,
   PlaySoundNoise,
+
 } from "./PlaySound";
 import { TextToMorse } from "./TextToMorse";
 import { memo } from "react";
@@ -27,7 +28,7 @@ const Footer = ({ mode, frequency, text }: FooterProps) => {
         zIndex: 10000,
       }}
       elevation={0}
-      style={{ backgroundColor: "#114B3D", borderRadius: 0 }}
+      style={{ backgroundColor: "#8E2A66", borderRadius: 0 }}
     >
       {mode === "manual-communication" && (
         <PlaySoundForFreeTime value="押してる間発信" frequency={frequency} />
