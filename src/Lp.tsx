@@ -1,13 +1,17 @@
 import { Link } from "react-router-dom";
 import Button from '@mui/material/Button';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import iconSrc from "./assets/img/icon.png";
 
 function Lp() {
   return (
     <>
       <div style={{ margin: '0 10%' }}>
-        <img style={{ display: 'block', margin: 'auto', width: '20%' }} src="src/assets/img/icon.png" alt="Application Name" />
-        <h3>正々堂々じゃ、<br />立ち行かないこともある。<br />
+        <img
+          style={{ display: "block", margin: "auto", width: "40%" }}
+          src={iconSrc}
+          alt="Application Name"
+        />        <h3>正々堂々じゃ、<br />立ち行かないこともある。<br />
           ちょっぴりズルくて耳聡い、<br />そんな大人のカンニングアプリ。</h3>
         <p style={{ margin: '0' }}>蚊ン忍具は、モールス信号とモスキート音を組み合わせた通信機能と、周囲の受験者への妨害機能を備えたカンニングアプリです。</p>
         <ul>

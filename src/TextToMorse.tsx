@@ -2,10 +2,11 @@ import { generateShortTone, generateLongTone } from "./PlaySound";
 import {
   CustomButton,
   frequency,
-  spaceBetweenCharsMilliseconds
+  spaceBetweenCharsMilliseconds,
 } from "./Params";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import axios from "axios";
+import { useEffect, useRef } from "react";
 
 interface CharToMorseProps {
   char: string;
@@ -199,7 +200,7 @@ const morse: { [key: string]: string } = {
   8: "11100",
   9: "11110",
   0: "11111",
-  ー: "01101"
+  ー: "01101",
 };
 
 /**
@@ -240,6 +241,19 @@ const APIKEY = import.meta.env.VITE_HIRAGANA_API_KEY;
  * @param {TextToMorseProps} value ボタンに表示する文字列
  */
 export function TextToMorse({ text, value }: TextToMorseProps) {
+  const isMounted = useRef(true);
+  const isAbleToPlay = useRef(true);
+
+  useEffect(() => {
+    return () => {
+      if (!isAbleToPlay.current) {
+        isMounted.current = false;
+      } else {
+        isAbleToPlay.current = false;
+      }
+    };
+  }, []);
+
   const handleMousedown = async (_: React.MouseEvent<HTMLButtonElement>) => {
     const textArray: string[] = [];
 
@@ -269,7 +283,7 @@ export function TextToMorse({ text, value }: TextToMorseProps) {
           const res = await axios.post("https://labs.goo.ne.jp/api/hiragana", {
             app_id: APIKEY,
             sentence: v,
-            output_type: "hiragana"
+            output_type: "hiragana",
           });
           return res.data.converted.replace(/\s+/g, "");
         } catch (error: any) {
@@ -283,6 +297,9 @@ export function TextToMorse({ text, value }: TextToMorseProps) {
     );
 
     for (const char of convertedTextArray.join("")) {
+      if (!isMounted.current) {
+        break;
+      }
       await CharToMorse({ char });
     }
   };
