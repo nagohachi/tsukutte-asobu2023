@@ -62,7 +62,7 @@ function Lp() {
         </p>
         <div style={{ width: "100%", margin: "0 20%" }}>
           <ThemeProvider theme={theme}>
-            <Link to="/tsukutte-asobu2023/home">
+            <Link to="/tsukutte-asobu2023/">
               <Button variant="contained" href="#contained-buttons">
                 カンニングを始める
               </Button>
