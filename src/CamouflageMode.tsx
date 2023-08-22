@@ -18,10 +18,14 @@ const CamouflagedPlaySoundNoise = styled(PlaySoundNoiseWithSimpleButton)`
   height: 33vh;
 `;
 
-export function CamouflageMode() {
+interface CamouflageModeProps {
+  frequency: number;
+}
+
+export function CamouflageMode({ frequency }: CamouflageModeProps) {
   return (
     <>
-      <CamouflagedPlaySoundForFreeTime value="" frequency={12000} />
+      <CamouflagedPlaySoundForFreeTime value="" frequency={frequency} />
       <CamouflagedPlaySoundNoise value="" frequency={7000} />
     </>
   );
