@@ -78,7 +78,7 @@ function FrequencyBar({ frequency, setFrequency }: FrequencyBarProps) {
           onChange={handleSliderChange}
           valueLabelFormat={valueLabelFormat}
           getAriaValueText={valuetext}
-          step={null}
+          step={1000}
           marks={marks}
           valueLabelDisplay="on"
           sx={{ mt: 4, zIndex: 200 }}
