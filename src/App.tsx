@@ -40,7 +40,7 @@ function App() {
           <MenuTabs frequency={frequency} />
         </ThemeProvider>
       )}
-      {isCamouflage && CamouflageMode()}
+      {isCamouflage && CamouflageMode({ frequency })}
     </>
   );
 }
