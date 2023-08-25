@@ -5,7 +5,6 @@ import iconSrc from "./assets/img/banner.png";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { themeOptions } from "./ThemeOptions";
 import IconButton from "@mui/material/IconButton";
-import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 
 function Lp() {
