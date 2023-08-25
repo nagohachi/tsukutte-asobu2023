@@ -65,6 +65,10 @@ function Lp() {
               </IconButton>
             </Link>
           </p>
+          <p style={{ marginBottom: "5%" }}>
+            ※
+            こちらは第5回ツクってアソぶハッカソン（テーマ「大人のカンニング」）応募作品です。
+          </p>
           <Link to="/tsukutte-asobu2023/">
             <Button variant="contained" href="#contained-buttons" fullWidth>
               カンニングを始める
